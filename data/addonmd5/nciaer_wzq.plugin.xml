@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[nciaer_wzq.plugin]]></item>
+	<item id="RevisionID"><![CDATA[54856]]></item>
+	<item id="SN"><![CDATA[20181103134HOho4FR44]]></item>
+	<item id="RevisionDateline"><![CDATA[1441166401]]></item>
+	<item id="Data">
+		<item id="/template/index.htm"><![CDATA[16934e6be1bff04f2da93d439fa9c493]]></item>
+		<item id="/discuz_plugin_nciaer_wzq_SC_UTF8.xml"><![CDATA[13353fceebfaf59ee53a843f96623917]]></item>
+		<item id="/wzq.inc.php"><![CDATA[60b064d23e8fafcdb855433a9076dacb]]></item>
+		<item id="/images/white_last.png"><![CDATA[87cbd023baab304396f0361db179b510]]></item>
+		<item id="/images/hover_up_right.png"><![CDATA[edf2416079156079c3341d7248320647]]></item>
+		<item id="/images/chessboard.png"><![CDATA[65d62024a56b3795e9b774f6c15d8a9f]]></item>
+		<item id="/images/hover_down_right.png"><![CDATA[d426bbf04c0cf9c5e6a55308b6a06170]]></item>
+		<item id="/images/black_last.png"><![CDATA[c5122918e8c0f0b01235c2ac7de799de]]></item>
+		<item id="/images/hover_up_left.png"><![CDATA[a0744a3998315732709ce8b4975878a7]]></item>
+		<item id="/images/hover_down_left.png"><![CDATA[b6ce38fc2246a372a7202db654dc7a1c]]></item>
+		<item id="/images/hover_right.png"><![CDATA[2697a9213fea7dfcf1ce77210c2a94b0]]></item>
+		<item id="/images/black.png"><![CDATA[34d6aed523ce6add5ee5eeba1ab29aae]]></item>
+		<item id="/images/hover.png"><![CDATA[29358c368fdd68fd679160527fbff87e]]></item>
+		<item id="/images/hover_up.png"><![CDATA[4bb2e0dc55d7a845ec30145e40b1d938]]></item>
+		<item id="/images/hover_down.png"><![CDATA[46bed4ba20f2baaab393a9c2d63c181e]]></item>
+		<item id="/images/white.png"><![CDATA[2476486590a7b7c9a4c7f23113df7d13]]></item>
+		<item id="/images/hover_left.png"><![CDATA[a589a127378548fee1e84d251cd61bf8]]></item>
+		<item id="/js/CookieHandle.js"><![CDATA[3bf44cd320973880fb3924693f13098b]]></item>
+		<item id="/js/index.js"><![CDATA[d0adfd283df8f37707d49144bfc527fd]]></item>
+	</item>
+</root>

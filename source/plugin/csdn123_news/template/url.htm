@@ -1,0 +1,369 @@
+<script src="source/plugin/csdn123_news/res/jquery.min.js"></script>
+
+<form action="?{$server_url}&csdn123_agrs=yes" method="post" id="form1">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="zhiwu" id="zhiwu" />
+  <table class="tb tb2 ">
+    <tr>
+        <th class="partition" colspan="2">{lang csdn123_news:reminder}</th>
+    </tr>
+    <tr>
+        <td class="tipsblock" s="1" colspan="2">
+          <ul>
+            <li>{lang csdn123_news:url_prompt01}<a href="?{$server_url}&sendid=zero&formhash={FORMHASH}">{lang csdn123_news:single_page_content}</a></li>
+            <li>{lang csdn123_news:url_prompt02}<a href="http://user.qzone.qq.com/155120699/blog/1502094574" target="_blank">http://user.qzone.qq.com/155120699/blog/1502094574</a></li>
+			<li>
+				{lang csdn123_news:url_prompt03}
+				<a href="javascript:pushurl(1);void(0)">{lang csdn123_news:url_catch_item01}</a>
+				<a href="javascript:pushurl(2);void(0)">{lang csdn123_news:url_catch_item02}</a>
+				<a href="javascript:pushurl(3);void(0)">{lang csdn123_news:url_catch_item03}</a>
+				<a href="javascript:pushurl(4);void(0)">{lang csdn123_news:url_catch_item04}</a>
+				<a href="javascript:pushurl(5);void(0)">{lang csdn123_news:url_catch_item05}</a>
+				<a href="javascript:pushurl(6);void(0)">{lang csdn123_news:url_catch_item06}</a>
+				<a href="javascript:pushurl(7);void(0)">{lang csdn123_news:url_catch_item07}</a>
+				<a href="javascript:pushurl(8);void(0)">{lang csdn123_news:url_catch_item08}</a>
+				{lang csdn123_news:url_catch_item_other}
+			</li>
+          </ul>
+       </td>
+    </tr>
+	<tr>
+		<td colspan="2">
+		<br><br>
+		<a href="?{$server_url}&sendid=zero&formhash={FORMHASH}" class="addtr">{lang csdn123_news:single_page_content}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="?{$server_url}&add_rule=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:add_rule}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="?{$server_url}&admin_rule=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:admin_rule}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="?{$server_url}&import_rule=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:import_rule}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="?{$server_url}&submitImportRule=yes&get_ruleData=yes&formhash={FORMHASH}" class="addtr" onClick="this.innerHTML='{lang csdn123_news:wait_moment}'">{lang csdn123_news:get_ruleData}</a>
+		<br><br>
+		</td>
+	</tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:column_pageURL}&nbsp;<a href="?{$server_url}&sendid=zero&formhash={FORMHASH}" style="font-size:small;font-weight:normal;vertical-align:middle;color:#666">{lang csdn123_news:switch_single}</a></td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="column_url" id="column_url" type="text" class="txt" style="width:350px;"></td>
+      <td class="vtop tips2" s="1">
+      	<strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:column_pageURL_prompt}        
+     </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:content_automatic}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);" id="model_catch_ul">
+          <li class="checked">
+            <input class="radio" type="radio" name="model_catch" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:content_algorithm01}</li>
+          <li>
+            <input class="radio" type="radio" name="model_catch" value="1">
+            &nbsp;{lang csdn123_news:content_algorithm02}</li>
+		  <li>
+            <input class="radio" type="radio" name="model_catch" value="2">
+            &nbsp;{lang csdn123_news:select_rule}</li>
+			
+        </ul></td>
+     <td class="vtop tips2" s="1" style="color:red"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:content_automatic_prompt}</td>         
+    </tr>
+	<tbody id="rule_select" style="display:none">
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:rule_custom_title}</td>
+    </tr>
+	<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform">
+		<select name="rule_id">
+			<option value="0">{lang csdn123_news:rule_custom_select}</option>
+			{loop $ruleRs $ruleItem}
+			<option value="{$ruleItem['ID']}">{$ruleItem['rule_name']}</option>
+			{/loop}
+		</select>
+	  </td>
+     <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong><a href="?{$add_rule_url}"> {lang csdn123_news:rule_add} </a></td>         
+    </tr>
+	</tbody>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:webCodeCorrection}</td>
+    </tr>
+	<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked">
+            <input class="radio" type="radio" name="webCodeCorrection" value="auto" checked="checked">
+            &nbsp;{lang csdn123_news:webCodeCorrection01}</li>
+          <li>
+            <input class="radio" type="radio" name="webCodeCorrection" value="GBK">
+            &nbsp;{lang csdn123_news:webCodeCorrection03}</li>
+          <li>
+            <input class="radio" type="radio" name="webCodeCorrection" value="GB2312">
+            &nbsp;{lang csdn123_news:webCodeCorrection04}</li>
+			
+        </ul></td>
+     <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:webCodeCorrection_prompt}</td>         
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:string_must_contain}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="needstr" id="needstr" type="text" class="txt" style="width:350px;"></td>
+      <td class="vtop tips2" s="1">
+      	<strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:string_must_prompt}        
+     </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:where_is_content_imported}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked" id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum" checked="checked">
+            &nbsp;{lang csdn123_news:import_to_forum}</li>
+          <li id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal">
+            &nbsp;{lang csdn123_news:import_to_portal}</li>
+          <li id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group">
+            &nbsp;{lang csdn123_news:import_group}</li>  
+        </ul></td>
+      <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+    </tr>
+    <tbody id="forum_panel">
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:all_sections_of_forum}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><select name="fid" id="fid" onChange="ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + this.value, 'threadtypes');">
+            
+            <!--{eval echo forumselect(FALSE, 0, 0, TRUE)}-->
+            
+          </select></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:subject_classification}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+        <td class="vtop rowform"><span id="threadtypes">
+          <select name="threadtypeid">
+            <option value="0"></option>
+          </select>
+          </span></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="portal_panel" style="display:none">
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:all_columns_of_portal}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><!--{eval echo category_showselect('portal', 'portal_catid', false)}--></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="group_panel" style="display:none">
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:all_groups}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform">
+        	
+            <select name="group_fid">
+            <!--{loop $grouplistArr $groupValue}-->
+            <option value="{$groupValue['fid']}">{$groupValue['name']}</option>
+            <!--{/loop}-->
+            </select>
+            
+        </td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:which_user_is_publishing}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="uid"  type="text" class="txt" value="{eval echo getRndUid(); }"></td>
+      <td class="vtop tips2" s="1">
+      <!--{if majia_chk()}-->
+      	<a href="{$regvest_url}" style="color:red;text-decoration:none">{lang csdn123_news:vest_empty}</a>
+      <!--{else}-->
+      	<strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:which_user_is_publishing_prompt}
+      <!--{/if}-->
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:display_source_link}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li>
+            <input class="radio" type="radio" name="display_link" value="1">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="display_link" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:display_source_link_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:image_localized_in_storage}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked">
+            <input class="radio" type="radio" name="image_localized" value="1" checked="checked">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="image_localized" value="0">
+            &nbsp;{lang csdn123_news:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:image_localized_in_storage_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:pseudo_original}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li>
+            <input class="radio" type="radio" name="pseudo_original" value="1">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="pseudo_original" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:pseudo_original_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:chinese_encoding_type}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:non_conversion}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="1">
+            &nbsp;{lang csdn123_news:traditional}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="2">
+            &nbsp;{lang csdn123_news:simplified}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:views}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="views"  type="text" class="txt" value="{eval echo rand(1,1000);}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:views_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:release_time}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="release_time"  type="text" class="txt" value="{$release_time}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:release_time_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="15"><br />
+        <div class="fixsel">
+          <input type="submit" class="btn" value="{lang csdn123_news:confirm_collection}" onClick="this.value='{lang csdn123_news:wait_moment}'">
+        </div></td>
+    </tr>
+  </table>
+</form>
+<script>
+var csdn123_jQ = jQuery.noConflict(true);
+(function ( $, window, undefined ) {
+	
+	$("#forum").click(function(){
+	
+		$("#forum_panel").show();
+		$("#portal_panel").hide();
+		$("#group_panel").hide();	
+		
+	});
+
+	$("#portal").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").show();
+		$("#group_panel").hide();	
+		
+	});
+	
+	$("#group").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").hide();
+		$("#group_panel").show();	
+		
+	});
+	
+	$("#model_catch_ul li").click(function(){
+	
+		if($(this).find("input").attr("value")==2)
+		{
+			$("#rule_select").show();
+		} else {
+			$("#rule_select").hide();
+		}
+	
+	});
+	
+	
+	
+})( csdn123_jQ, window);
+function pushurl(num)
+{
+
+	switch(num)
+	{
+	
+		case 1:
+		csdn123_jQ("#column_url").val("http://www.qq.com");
+		csdn123_jQ("#needstr").val("qq.com,a,2017,htm")
+		break;
+		
+		case 2:
+		csdn123_jQ("#column_url").val("http://news.163.com/");
+		csdn123_jQ("#needstr").val("163.com,17,htm")
+		break;
+		
+		case 3:
+		csdn123_jQ("#column_url").val("http://news.sina.com.cn/");
+		csdn123_jQ("#needstr").val("sina,2017,htm")
+		break;
+		
+		case 4:
+		csdn123_jQ("#column_url").val("http://news.ifeng.com/");
+		csdn123_jQ("#needstr").val("ifeng,2017,htm")
+		break;
+		
+		case 5:
+		csdn123_jQ("#column_url").val("http://www.people.com.cn/");
+		csdn123_jQ("#needstr").val("people,2017,n1,htm")
+		break;
+		
+		case 6:
+		csdn123_jQ("#column_url").val("http://www.xinhuanet.com/");
+		csdn123_jQ("#needstr").val("xinhuanet,2017,c_,htm")
+		break;
+		
+		case 7:
+		csdn123_jQ("#column_url").val("http://www.gmw.cn/");
+		csdn123_jQ("#needstr").val("gmw,2017,content_,htm")
+		break;
+		
+		case 8:
+		csdn123_jQ("#column_url").val("http://www.china.com.cn/");
+		csdn123_jQ("#needstr").val("china,2017,htm")
+		break;
+		
+	
+	}
+
+}
+</script> 
+<script defer>
+var hze_fid=document.getElementById('fid').value;
+ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + hze_fid, 'threadtypes');
+document.getElementById('zhiwu').value=window.location.href;
+</script> 

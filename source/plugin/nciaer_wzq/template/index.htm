@@ -1,0 +1,433 @@
+<!--{subtemplate common/header}-->
+
+<div id="pt" class="bm cl">
+    <div class="z">
+        <a href="./" class="nvhm" title="{lang homepage}">$_G[setting][bbname]</a><em>&raquo;</em>
+        <a href="forum.php">$_G[setting][bbname]</a><em>&raquo;</em>五子棋免费版
+    </div>
+</div>
+<script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/1.7.2/jquery.min.js"></script>
+<script>$.noConflict();</script>
+<script type="text/javascript" src="source/plugin/nciaer_wzq/js/CookieHandle.js"></script>
+<script type="text/javascript" src="source/plugin/nciaer_wzq/js/index.js"></script>
+
+<style type = "text/css">
+.wrapper {
+	margin: 10px auto;
+	width: 562px;
+	position: relative;
+}
+/* 棋盘 */
+div.chessboard {
+	margin-top: 10px;
+	width: 542px;
+	background: url(source/plugin/nciaer_wzq/images/chessboard.png) no-repeat 14px 14px rgb(250, 250, 250);
+	overflow: hidden;
+	box-shadow: 0px 0px 5px #888;
+	-webkit-box-shadow: 0px 0px 5px #888;
+	-moz-box-shadow: 0px 0px 5px #888;
+}
+div.chessboard div {
+	float: left;
+	width: 36px;
+	height: 36px;
+	border-top: 0px solid #ccc;
+	border-left: 0px solid #ccc;
+	border-right: 0;
+	border-bottom: 0;
+	cursor: pointer;
+}
+/* 棋子 */
+div.chessboard div.black {
+	background: url(source/plugin/nciaer_wzq/images/black.png) no-repeat 4px 4px;
+}
+div.chessboard div.white {
+	background: url(source/plugin/nciaer_wzq/images/white.png) no-repeat 4px 4px;
+}
+div.chessboard div.hover {
+	background: url(source/plugin/nciaer_wzq/images/hover.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-up {
+	background: url(source/plugin/nciaer_wzq/images/hover_up.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-down {
+	background: url(source/plugin/nciaer_wzq/images/hover_down.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-up-left {
+	background: url(source/plugin/nciaer_wzq/images/hover_up_left.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-up-right {
+	background: url(source/plugin/nciaer_wzq/images/hover_up_right.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-left {
+	background: url(source/plugin/nciaer_wzq/images/hover_left.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-right {
+	background: url(source/plugin/nciaer_wzq/images/hover_right.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-down-left {
+	background: url(source/plugin/nciaer_wzq/images/hover_down_left.png) no-repeat 1px 1px;
+}
+div.chessboard div.hover-down-right {
+	background: url(source/plugin/nciaer_wzq/images/hover_down_right.png) no-repeat 1px 1px;
+}
+div.chessboard div.white-last {
+	background: url(source/plugin/nciaer_wzq/images/white_last.png) no-repeat 4px 4px;
+}
+div.chessboard div.black-last {
+	background: url(source/plugin/nciaer_wzq/images/black_last.png) no-repeat 4px 4px;
+}
+/* 控制面板 */
+div.operating-panel {
+	width: 200px;
+	text-align: center;
+}
+.operating-panel a {
+	color: #FFF;
+	display: inline-block;
+	padding: 10px 20px;
+	margin: 5px;
+	background: rgb(100, 167, 233);
+	text-decoration: none;
+}
+.operating-panel a:hover {
+	background: rgb(48, 148, 247);
+}
+.operating-panel a.disable, .operating-panel a.disable:hover {
+	background: rgb(197, 203, 209);
+	color: rgb(130, 139, 148);
+}
+.operating-panel a.selected {
+	border: 5px solid #F3C242;
+	padding: 5px 15px;
+}
+.operating-panel a.btn_start {
+	width: 100px;
+}
+#result_tips {
+	color: #F00;
+	line-height: 30px;
+	height: 30px;
+	text-align: center;
+	font-size: 24px;
+}
+#result_info {
+	line-height: 28px;
+	color: #F00;
+	font-weight: bold;
+}
+</style>
+
+<div id="ct" class="wp cl ct2">
+    <div class="mn bm cl">
+        <div class="bm_c">
+			<center>
+				<table border="0">
+					<tr>
+						<td>
+	
+<div class="wrapper">
+<div id="result_tips"></div>
+	<div class="chessboard">
+	<!-- top line -->
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top"></div>
+	<div class="chess-top chess-right"></div>
+	<!-- line 1 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 2 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 3 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 4 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 5 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 6 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 7 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 8 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 9 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 10 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 11 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 12 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- line 13 -->
+	<div class="chess-left"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-middle"></div>
+	<div class="chess-right"></div>
+	<!-- bottom line -->
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom"></div>
+	<div class="chess-bottom chess-right"></div>
+	</div>
+</div>	
+						
+						
+						
+						</td>
+					</tr>
+				</table>
+			</center>
+        </div>
+    </div>
+    
+    <div class="sd">
+		<!--控制面板开始-->
+        <div class="bm">
+            <div class="bm_h">
+                <h2>控制面板</h2>
+            </div>
+            <div class="bm_c">
+                <p class="xl xl2 cl" style="line-height:25px;">
+                   
+	<div class="operating-panel">
+		<div>
+			<a id="black_btn" class="btn selected" href="#">黑子</a>
+			<a id="white_btn" class="btn" href="#">白子</a>
+		</div>
+		<div>
+			<a id="first_move_btn" class="btn selected" href="#">先手</a>
+			<a id="second_move_btn" class="btn" href="#">后手</a>
+		</div>
+		<div>
+			<a id="replay_btn" class="btn btn_start" href="#">开始</a>
+		</div>
+		<p id="result_info">胜率：100%</p>
+		
+	</div>
+				   
+                </p>
+            </div>
+        </div>	
+		<!--控制面板结束-->
+	
+        <div class="bm">
+            <div class="bm_h">
+                <h2>玩法说明</h2>
+            </div>
+            <div class="bm_c">
+                <p class="xl xl2 cl" style="line-height:25px;">
+				1，玩家首先选择黑子或者白子<br />
+				2，选择先手则玩家走第一步；选择后手则电脑走第一步<br />
+				3，系统也会根据玩家历史的输赢记录推算出玩家的胜率
+				
+				
+                </p>
+            </div>
+        </div>
+
+		
+    </div>
+</div>
+
+<!--{subtemplate common/footer}-->

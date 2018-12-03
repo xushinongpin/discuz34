@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[bon_songs.plugin]]></item>
+	<item id="RevisionID"><![CDATA[74077]]></item>
+	<item id="SN"><![CDATA[2018110313JMWl6lL50I]]></item>
+	<item id="RevisionDateline"><![CDATA[1530586801]]></item>
+	<item id="Data">
+		<item id="/discuz_plugin_bon_songs_TC_UTF8.xml"><![CDATA[d36e5445ac05288ba0532e093a65e690]]></item>
+		<item id="/template/extend_common.css"><![CDATA[b55f9f11875b387b1a34a457c14e48e3]]></item>
+		<item id="/template/module.htm"><![CDATA[e8b5ec4fb115a61dc8bc9f5c0b3b0e75]]></item>
+		<item id="/songs.inc.php"><![CDATA[f0bce41fafec2389332dac1666cdeba0]]></item>
+		<item id="/more.inc.php"><![CDATA[d8160671ce655fd54ad48df58581c351]]></item>
+		<item id="/discuz_plugin_bon_songs_SC_UTF8.xml"><![CDATA[b64935f8fc7e294bd42fc8c216592940]]></item>
+		<item id="/discuz_plugin_bon_songs_TC_BIG5.xml"><![CDATA[4f51aace6ca6185b99c2556132bdcb88]]></item>
+		<item id="/static/cover.png"><![CDATA[75f65b07b3a7642644551ce30f2f1827]]></item>
+		<item id="/static/bg/yellow.png"><![CDATA[c71de95eaa71781237b1103328a7919b]]></item>
+		<item id="/static/bg/black.png"><![CDATA[5e321037903a940f6526c22c4342dc33]]></item>
+		<item id="/static/bg/red.png"><![CDATA[1fb4630fac40ccd375bd46143df8dead]]></item>
+		<item id="/static/bg/blue.png"><![CDATA[902b816924af6b13caf3e4078743130a]]></item>
+		<item id="/static/bg/purple.png"><![CDATA[54c311c8d9e181f6412cd60e92204fd8]]></item>
+		<item id="/static/bg/green.png"><![CDATA[eda062eb334866e1e1d1ee8daf36d78b]]></item>
+		<item id="/static/bg/orange.png"><![CDATA[57ce20de04e126bf3c7b6d6c28e9969d]]></item>
+		<item id="/static/icon/kuwodt.png"><![CDATA[3348553bbd29a79fa8439f65b1d2a7a9]]></item>
+		<item id="/static/icon/baidu.png"><![CDATA[7181601127cec5b07f4b96555c8a29e8]]></item>
+		<item id="/static/icon/jiuku.png"><![CDATA[5b8e88af11520a893cfcbb30d7c180b4]]></item>
+		<item id="/static/icon/kugou.png"><![CDATA[59e7b6878f55125f68d3547b56358736]]></item>
+		<item id="/static/icon/1ting.png"><![CDATA[d4c2fa1492c1e164550ef920ae843d31]]></item>
+		<item id="/static/icon/beva.png"><![CDATA[deedb06b83d1184eaa28e7bdb4127a91]]></item>
+		<item id="/static/icon/kuwo.png"><![CDATA[fdec28b1361aab0993366cc76b87b518]]></item>
+		<item id="/static/icon/yinyuetai.png"><![CDATA[c08cd83b6ff34890f4101bb1fa30b298]]></item>
+		<item id="/static/icon/xiami.png"><![CDATA[3a4ead9f108ebcf27dbb74e1655094c2]]></item>
+		<item id="/static/icon/163.png"><![CDATA[32b2c6a840b38730e9aef06a74f1a6b3]]></item>
+		<item id="/static/songs.js"><![CDATA[8ca7744c632e499b2af6b2e5af2c51af]]></item>
+		<item id="/static/icon.png"><![CDATA[6f773071809d1e1fce7eb5f0818443ac]]></item>
+		<item id="/discuz_plugin_bon_songs_SC_GBK.xml"><![CDATA[1ade7e68fd60aa4626cdb797df8026ec]]></item>
+	</item>
+</root>

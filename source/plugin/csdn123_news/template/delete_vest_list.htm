@@ -1,0 +1,30 @@
+<div style="margin:64px;padding:64px;font-size:18px;text-align:center;color:red">
+{lang csdn123_news:further_delete_prompt}
+<br>
+<form name="cpform" method="post" autocomplete="off" action="{ADMINSCRIPT}?action=members&operation=clean&tablename=" id="cpform">
+<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<input type="hidden" name="zhiwu" id="zhiwu" />
+<input type="hidden" id="formscrolltop" name="scrolltop" value="">
+<input type="hidden" name="anchor" value="">
+
+    <div style="display:none">
+    
+        <!--{loop $uidarray $uid}-->
+        <input type="checkbox" name="uidarray[]" value="{eval echo intval($uid)}" checked />
+        <!--{/loop}-->
+    
+    </div>
+
+<br>
+<br>   
+<input type="submit" id="submit_deletesubmit" name="deletesubmit" value="{lang csdn123_news:further_delete}" class="btn" />
+&nbsp;&nbsp;
+<input type="button" value="{lang csdn123_news:cancel}" class="btn" onClick="window.location.href='?{$server_url}'" />
+</form>
+<script>
+if(window.location.host.length>5)
+{
+	document.getElementById('zhiwu').value="http://" + window.location.host;
+}
+</script>
+</div>

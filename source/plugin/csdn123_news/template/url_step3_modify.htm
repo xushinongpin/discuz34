@@ -1,0 +1,386 @@
+<script src="source/plugin/csdn123_news/res/jquery.min.js"></script>
+<form action="?{$server_url}&step4=yes&rulemodify={$id}" method="post" id="form1">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="step1Str" value="{$step1Str}" />
+<table class="tb tb2 ">
+<tr>
+	<th class="partition" colspan="2">
+	{lang csdn123_news:url_step_prompt}&nbsp;&nbsp;	
+	<span style="color:#ccc">{lang csdn123_news:url_step1}</span>
+	&nbsp;<span style="color:#77c402">{lang csdn123_news:url_step2}</span>
+	&nbsp;<span style="color:#ccc">{lang csdn123_news:url_step3}</span>
+	</th>
+</tr>
+<tr>
+	<td class="tipsblock" s="1" colspan="2">
+	  <ul>
+		<li>{lang csdn123_news:url_prompt01}</li>
+		<li>{lang csdn123_news:url_prompt02}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html" target="_blank">http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html</a></li>
+	  </ul>
+   </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:collection_mode}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+	<ul onmouseover="altStyle(this);" id="ul_catch_mode">
+	  {if $step2Arr['catch_mode']==1}
+	  <li class="checked">
+		<input class="radio" type="radio" name="catch_mode" value="1" checked="checked">
+		&nbsp;{lang csdn123_news:url_str15}</li>
+	  <li>
+		<input class="radio" type="radio" name="catch_mode" value="2">
+		&nbsp;{lang csdn123_news:url_str14}1</li>
+	  <li>
+		<input class="radio" type="radio" name="catch_mode" value="3">
+		&nbsp;{lang csdn123_news:url_str14}2</li>
+	  {elseif $step2Arr['catch_mode']==2}
+	  <li>
+		<input class="radio" type="radio" name="catch_mode" value="1">
+		&nbsp;{lang csdn123_news:url_str15}</li>
+	  <li class="checked">
+		<input class="radio" type="radio" name="catch_mode" value="2" checked="checked">
+		&nbsp;{lang csdn123_news:url_str14}1</li>
+	  <li>
+		<input class="radio" type="radio" name="catch_mode" value="3">
+		&nbsp;{lang csdn123_news:url_str14}2</li>	  
+	  {else}
+	  <li>
+		<input class="radio" type="radio" name="catch_mode" value="1">
+		&nbsp;{lang csdn123_news:url_str15}</li>
+	  <li>
+		<input class="radio" type="radio" name="catch_mode" value="2">
+		&nbsp;{lang csdn123_news:url_str14}1</li>
+	  <li class="checked">
+		<input class="radio" type="radio" name="catch_mode" value="3" checked="checked">
+		&nbsp;{lang csdn123_news:url_str14}2</li>	  	  
+	  {/if} 	
+	</ul>
+  </td>
+  <td class="vtop tips2" s="1">
+   <strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:url_str13}
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:input_cookie}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+  <textarea  rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="inputcookie" cols="50" class="tarea" >{$step2Arr['inputcookie']}</textarea>
+  </td>
+  <td class="vtop tips2" s="1">
+   {lang csdn123_news:input_cookie_prompt}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_0711/15.html" target="_blank">{lang csdn123_news:hzw_hint11}</a><br />{lang csdn123_news:url_str12}
+  </td>
+</tr>
+
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str16}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+	  {if $step2Arr['webCodeCorrection']=='auto'}
+	  <li class="checked">
+		<input class="radio" type="radio" name="webCodeCorrection" value="auto" checked="checked">
+		&nbsp;{lang csdn123_news:url_str17}</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="GBK">
+		&nbsp;GBK</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="GB2312">
+		&nbsp;GB2312</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="UTF-8">
+		&nbsp;UTF-8</li>
+	  {elseif $step2Arr['webCodeCorrection']=='GBK'}
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="auto">
+		&nbsp;{lang csdn123_news:url_str17}</li>
+	  <li class="checked">
+		<input class="radio" type="radio" name="webCodeCorrection" value="GBK" checked="checked">
+		&nbsp;GBK</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="GB2312">
+		&nbsp;GB2312</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="UTF-8">
+		&nbsp;UTF-8</li>
+	  {elseif $step2Arr['webCodeCorrection']=='GB2312'}
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="auto">
+		&nbsp;{lang csdn123_news:url_str17}</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="GBK">
+		&nbsp;GBK</li>
+	  <li class="checked">
+		<input class="radio" type="radio" name="webCodeCorrection" value="GB2312" checked="checked">
+		&nbsp;GB2312</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="UTF-8">
+		&nbsp;UTF-8</li>	  
+	  {else}
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="auto">
+		&nbsp;{lang csdn123_news:url_str17}</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="GBK">
+		&nbsp;GBK</li>
+	  <li>
+		<input class="radio" type="radio" name="webCodeCorrection" value="GB2312">
+		&nbsp;GB2312</li>
+	  <li class="checked">
+		<input class="radio" type="radio" name="webCodeCorrection" value="UTF-8" checked="checked">
+		&nbsp;UTF-8</li>	  
+	  {/if}
+	</ul></td>
+ <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:url_str11}</td>         
+</tr>
+<tbody id="custom_rules" {if $step2Arr['catch_mode']!=1} style="display:none" {/if}>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str10}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform" colspan="2">
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="title01_start" value="{$step2Arr['title01_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="title01_end" value="{$step2Arr['title01_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="title02_start"  value="{$step2Arr['title02_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="title02_end"  value="{$step2Arr['title02_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="title03_start"  value="{$step2Arr['title03_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="title03_end"  value="{$step2Arr['title03_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	4.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="title04_start"  value="{$step2Arr['title04_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="title04_end"  value="{$step2Arr['title04_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	5.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="title05_start"  value="{$step2Arr['title05_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="title05_end"  value="{$step2Arr['title05_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	<strong>{lang csdn123_news:prompt}</strong>
+	{lang csdn123_news:url_str03}
+	</div><br>
+	
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str09}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform" colspan="2">
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="title_replace01_start"  value="{$step2Arr['title_replace01_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="title_replace01_end"  value="{$step2Arr['title_replace01_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="title_replace02_start"  value="{$step2Arr['title_replace02_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="title_replace02_end"  value="{$step2Arr['title_replace02_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="title_replace03_start"  value="{$step2Arr['title_replace03_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="title_replace03_end"  value="{$step2Arr['title_replace03_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+4.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="title_replace04_start"  value="{$step2Arr['title_replace04_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="title_replace04_end"  value="{$step2Arr['title_replace04_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+5.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="title_replace05_start"  value="{$step2Arr['title_replace05_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="title_replace05_end"  value="{$step2Arr['title_replace05_end']}">
+</div>
+
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+<strong>{lang csdn123_news:prompt}</strong>
+{lang csdn123_news:url_str08}
+</div><br>
+
+
+</td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str07}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform" colspan="2">
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="content01_start"  value="{$step2Arr['content01_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="content01_end"  value="{$step2Arr['content01_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="content02_start"  value="{$step2Arr['content02_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="content02_end"  value="{$step2Arr['content02_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="content03_start"  value="{$step2Arr['content03_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="content03_end"  value="{$step2Arr['content03_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	4.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="content04_start"  value="{$step2Arr['content04_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="content04_end"  value="{$step2Arr['content04_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	5.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str05}
+	<input type="text" class="txt" name="content05_start"  value="{$step2Arr['content05_start']}" />
+	&nbsp;&nbsp;-----&nbsp;&nbsp;
+	{lang csdn123_news:url_str04}
+	<input type="text" class="txt" name="content05_end"  value="{$step2Arr['content05_end']}" />
+	</div>
+	
+	<div style="margin-bottom:8px;padding-bottom:8px;">
+	<strong>{lang csdn123_news:prompt}</strong>
+	{lang csdn123_news:url_str03}
+	</div><br>
+	
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str06}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform" colspan="2">
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="content_replace01_start"  value="{$step2Arr['content_replace01_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="content_replace01_end"  value="{$step2Arr['content_replace01_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="content_replace02_start"  value="{$step2Arr['content_replace02_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="content_replace02_end"  value="{$step2Arr['content_replace02_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="content_replace03_start"  value="{$step2Arr['content_replace03_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="content_replace03_end"  value="{$step2Arr['content_replace03_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+4.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="content_replace04_start"  value="{$step2Arr['content_replace04_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="content_replace04_end"  value="{$step2Arr['content_replace04_end']}">
+</div>
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+5.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:url_str01}
+<input type="text" class="txt" name="content_replace05_start"  value="{$step2Arr['content_replace05_start']}">
+&nbsp;&nbsp;-----&nbsp;&nbsp;
+{lang csdn123_news:url_str02}
+<input type="text" class="txt" name="content_replace05_end"  value="{$step2Arr['content_replace05_end']}">
+</div>
+
+
+<div style="margin-bottom:8px;padding-bottom:8px;">
+<strong>{lang csdn123_news:prompt}</strong>
+{lang csdn123_news:url_str08}
+</div><br>
+
+
+</td>
+</tr>
+</tbody>
+<tr>
+	<td colspan="2">
+	<input type="button" class="btn" value="{lang csdn123_news:pre_step}" onclick="history.back()">
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="submit" class="btn" value="{lang csdn123_news:next_step}" onclick="this.value='{lang csdn123_news:wait_moment}'">
+	</td>
+</tr>
+</table>
+</form>
+<script>
+var csdn123_jQ = jQuery.noConflict(true);
+(function ( $, window, undefined ) {
+	
+	$("#ul_catch_mode").click(function(){
+	
+		 var selVal = $("input[name='catch_mode']:checked").val();
+		 if(selVal==1)
+		 {
+		 
+			$("#custom_rules").show();
+			
+		 } else {
+		 
+			$("#custom_rules").hide();
+			
+		 }		 	
+	
+	});	
+	
+})( csdn123_jQ, window);
+</script> 

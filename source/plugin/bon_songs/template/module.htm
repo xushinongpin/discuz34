@@ -1,0 +1,60 @@
+{subtemplate common/header}
+<style>
+.bon_songs_cur, .bon_songs_cur:hover, .bon_songs_item:hover, .bon_songs_close {background-image:url($_G['siteurl']source/plugin/bon_songs/static/icon.png);}
+.bon_songs_logo i {background-image:url($_G['siteurl']source/plugin/bon_songs/static/cover.png);}
+</style>
+<div id="pt" class="bm cl">
+	<div class="z"><a href="./" class="nvhm" title="{lang homepage}">$_G['setting'][bbname]</a><em>&raquo;</em><a href="$_G['siteurl']forum.php">{lang bon_songs:name_forum}</a> <em>&rsaquo;</em> $bon['songs'][name]</div>
+</div>
+<div class="bon_songs" id="bonSongs">
+	<div id="bonSongsTab" class="bon_songs_tab bon_songs_color_$bon['songs']['picture_type']">
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'jiuku'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_jiuku}" target="bonSongsFrame" rel="$songs['url']['jiuku']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/jiuku.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_jiuku}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'kuwo'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_kuwo}" target="bonSongsFrame" rel="$songs['url']['kuwo']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/kuwo.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_kuwo}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'kugou'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_kugou}" target="bonSongsFrame" rel="$songs['url']['kugou']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/kugou.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_kugou}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'baidu'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_baidu}" target="bonSongsFrame" rel="$songs['url']['baidu']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/baidu.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_baidu}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'music163'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_163}" target="bonSongsFrame" rel="$songs['url']['music163']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/163.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_163}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'yiting'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_1ting}" target="bonSongsFrame" rel="$songs['url']['yiting']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/1ting.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_1ting}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'yinyuetai'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_yinyuetai}" target="bonSongsFrame" rel="$songs['url']['yinyuetai']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/yinyuetai.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_yinyuetai}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'xiami'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_xiami}" target="bonSongsFrame" rel="$songs['url']['xiami']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/xiami.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_xiami}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'kuwodt'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_kuwodt}" target="bonSongsFrame" rel="$songs['url']['kuwodt']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/kuwodt.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_kuwodt}</span>
+		</a>
+		<a class="bon_songs_item<!--{if $bon['songs']['default_player'] == 'beva'}--> bon_songs_cur<!--{/if}-->" title="{lang bon_songs:name_beva}" target="bonSongsFrame" rel="$songs['url']['beva']">
+			<div class="bon_songs_logo"><img src="$_G['siteurl']source/plugin/bon_songs/static/icon/beva.png"><i></i></div>
+			<span class="bon_songs_name">{lang bon_songs:name_beva}</span>
+		</a>
+	</div>
+	<div id="bonSongsPlayer" class="bon_songs_player" style="background-image:url($_G['siteurl']source/plugin/bon_songs/static/bg/$bon['songs']['picture_type'].png)">
+		<a href="javascript:;" id="bonSongsClose" class="bon_songs_close">{lang bon_songs:btn_close}</a>
+		<div class="bon_songs_box">
+			<iframe scrolling="no" frameborder="0" src="$songs['url'][$bon['songs']['default_player']]" name="bonSongsFrame" id="bonSongsIframe" class="bon_songs_iframe"></iframe>
+		</div>
+	</div>
+</div>
+<script type="text/javascript" src="$_G['siteurl']source/plugin/bon_songs/static/songs.js"></script>
+{subtemplate common/footer}

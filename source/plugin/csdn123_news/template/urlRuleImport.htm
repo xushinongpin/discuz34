@@ -1,0 +1,15 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&submitImportRule=yes" id="cpform" >
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="zhiwu" id="zhiwu" />
+  <div style="margin:16px;">
+    <textarea class="tarea" style="width:700px;height:300px;margin:4px;" name="rule_data" onMouseOver="this.select()"></textarea>
+    <br>
+    {lang csdn123_news:rule_format_prompt} <br>
+    <br>
+    <br>
+    <input type="submit" class="btn" value="{lang csdn123_news:confirm_import}" onclick="this.value='{lang csdn123_news:import_loading}'"/>
+  </div>
+</form>
+<script>
+document.getElementById('zhiwu').value=document.location.href;
+</script>

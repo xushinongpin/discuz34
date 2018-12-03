@@ -1,0 +1,115 @@
+<style>
+    body{
+        font-size: 14px;
+    }
+    .tb .tb2 td{
+        font-size: 14px;
+    }
+    .version {
+        color: #FFF;
+        background: rgb(85, 85, 85);
+        float: left;
+        margin-right: 3px;
+        text-align: center;
+        font-weight: 500;
+        line-height: 20px;
+    }
+
+    .version_detail {
+        background-color: #cccccc;
+        color: rgb(85, 85, 85);
+        line-height: 20px;
+        font-size: 14px;
+        padding: 1px 0px 3px 0px;
+    }
+    .tips {
+        margin-left: 0px;
+        color: #808080;
+    }
+    p {
+        color: #808080;
+    }
+    div {
+        color: #808080;
+    }
+    .web-address {
+        font-weight: 600;
+    }
+    .tips a{
+        color: #428bca;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+    .tips a.dis-a:hover{
+        color: #1B7ACC;
+        font-size: 14px;
+        text-decoration: none;
+    }
+    a.dis-a {
+        color: #428bca;
+        font-size: 14px;
+        text-decoration: underline;
+    }
+    a.dis-a:hover{
+        color: #1B7ACC;
+        font-size: 14px;
+        text-decoration: none;
+    }
+    .ta-content {
+        margin: 10px 15px;
+        padding: 0px 20px;
+        line-height: 20px;
+    }
+</style>
+<div>
+    <table class="tb tb2">
+        <tbody>
+            <tr>
+                <td class="" colspan="3">
+                    <p>{$ta_lang['sjs_info']}</p><br/>
+                </td>
+            </tr>
+            <tr>
+                <td class="">{$ta_lang['sjs_website']}</td>
+                <td class="" colspan="2">
+                    <div class='ta-content'>
+                        <b><a href="http://www.shenjian.io" class='dis-a' target="_blank">www.shenjian.io</a></b>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="">{$ta_lang['plugin_version']}</td>
+                <td class="">
+                    <div class='ta-content'>
+                        <a href="http://www.shenjian.io/index.php?r=index/download" target="_blank"><span class="version">&nbsp;&nbsp;Discuz! {$version['discuz_min']}&nbsp;&nbsp;<span class="version_detail"> &nbsp;&nbsp;{$version['plugin']}&nbsp;&nbsp;</span></span></a>
+                    </div>
+                </td>
+            </tr>
+            <tr>
+                <td class="">{$ta_lang['publish_url']}</td>
+                <td class="">
+                    <div class='ta-content'>
+                        <!--{if $is_intranet}-->
+                            <span class='web-address del'>{$ta_lang['publish_url_error']}</span>
+                        <!--{else}-->
+                            <span class='web-address'>{$basic_web_address}</span>
+                        <!--{/if}-->
+                    </div>
+                </td>
+                <!--{if $is_intranet === false }-->
+                <td class="">
+                    {$ta_lang['publish_url_tip']}
+                </td>
+                <!--{/if}-->
+            </tr>
+            <tr>
+                <td class="">{$ta_lang['use_help']}</td>
+                <td class="" colspan="2">
+                    <div class='ta-content'>
+                        {$ta_lang['tip_detail']}
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

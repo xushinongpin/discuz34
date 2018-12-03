@@ -1,0 +1,667 @@
+<!--{block csdn123_news_return}-->
+
+<div style="margin:4px auto;border:1px solid #CCC;padding:10px;line-height:24px;background:#EEE">
+  <div> {lang csdn123_news:keyword}{lang csdn123_news:colon}
+    <input type="text" id="csdn123keyword" class="px" placeholder="{lang csdn123_news:enter_keywords_want}"  size="60" />
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <button type="button"  id="csdn123_query" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:acquisition_content}</em></button>
+    <button type="button"  class="pn vm" style="vertical-align:top;" onclick="alert('{lang csdn123_news:catch_new_alert}')"><em>{lang csdn123_news:catch_new}</em></button>
+  </div>
+  <div style="margin-top:16px;display:<!--{if $csdn123_showmore==0}-->none<!--{else}-->block<!--{/if}-->" id="csdn123_moreGongNeng"> {lang csdn123_news:please_select}
+    <select id="csdn123_searchresult">
+      <option value="no">----{lang csdn123_news:shows_results_collected}----</option>
+    </select>
+    <span id="csdn123_loading"></span>
+    <button type="button"  id="csdn123_someNews" class="pn vm" style="vertical-align:top;display:none"><em>{lang csdn123_news:hzw_hint01}</em></button>	
+    <button type="button"  id="csdn123_newsPre" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:previous_article}</em></button>
+    <button type="button"  id="csdn123_newsNext" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:next_article}</em></button>
+  </div>
+  <div style="clear:both;margin-top:16px;display:<!--{if $csdn123_showmore==0}-->none<!--{else}-->block<!--{/if}-->" id="csdn123_moreGongNeng2"> {lang csdn123_news:other}
+    <button type="button"  id="csdn123_reset" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:initial_content}</em></button>
+    <button type="button"  id="csdn123_likearticle" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:similar_content}</em></button>
+    <button type="button"  id="csdn123_tongyici" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:originality}</em></button>
+    <button type="button"  id="csdn123_localimgae" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:picture_localization}</em></button>
+    <button type="button"  id="csdn123_fromurl" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:source_address}</em></button>
+    <button type="button"  id="csdn123_textformat" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:content_publishing}</em></button>
+    <button type="button"  id="csdn123_jian" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:simplified}</em></button>
+    <button type="button"  id="csdn123_fan" class="pn vm" style="vertical-align:top;"><em>{lang csdn123_news:traditional}</em></button>
+    <br /><br />{lang csdn123_news:commonly_keywords}
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw1}')">{lang csdn123_news:console_kw1}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw2}')">{lang csdn123_news:console_kw2}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw3}')">{lang csdn123_news:console_kw3}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw4}')">{lang csdn123_news:console_kw4}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw5}')">{lang csdn123_news:console_kw5}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw6}')">{lang csdn123_news:console_kw6}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw7}')">{lang csdn123_news:console_kw7}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw8}')">{lang csdn123_news:console_kw8}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw9}')">{lang csdn123_news:console_kw9}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw10}')">{lang csdn123_news:console_kw10}</a>&nbsp;|&nbsp;
+	<a href="javascript:csdn123_keyword('{lang csdn123_news:console_kw11}')">{lang csdn123_news:console_kw11}</a><br>
+    {lang csdn123_news:history_keywords}<span id="csdn123_tishi_historykeyword"></span> </div>
+</div>
+<br />
+<script src="{$_G['siteurl']}source/plugin/csdn123_news/res/jquery.min.js"></script> 
+<script src="{$_G['siteurl']}source/plugin/csdn123_news/res/jquery.cookie.js"></script> 
+<script type="text/javascript">
+
+var _csdn123_siteurl = encodeURIComponent("{$_G['siteurl']}");
+
+var _csdn123_s1teurl = encodeURIComponent(SITEURL);
+
+var csdn123_remoteUrl="";
+
+var csdn123_jQ = jQuery.noConflict(true);
+
+var csdn123_showimg="{$_G['siteurl']}source/plugin/csdn123_news/display_picture.php";
+
+(function ( $, window, undefined ) {
+
+$("#csdn123_query").click(function(){
+
+	
+
+	var csdn123keywordQuery = $("#csdn123keyword").val();
+
+	csdn123_getcookies(csdn123keywordQuery);
+
+
+	if(csdn123keywordQuery=="")
+
+	{
+
+		alert("{lang csdn123_news:enter_keywords_url}");
+
+		$("#csdn123keyword").focus();
+
+		return;
+
+	}
+
+	if(csdn123keywordQuery.length<2)
+
+	{
+
+		alert("{lang csdn123_news:entered_too_short}");
+
+		$("#csdn123keyword").focus();
+
+		return;
+
+	}
+
+	csdn123keywordQuery=encodeURIComponent(csdn123keywordQuery);
+	
+	$("#csdn123_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />');
+
+	var csdn123_ajax_url="{$_G['siteurl']}plugin.php?id=csdn123_news:csdn123_fun&cms=dz&search_query="+ csdn123keywordQuery +"&csdn123callback=?";
+
+	$.getJSON(csdn123_ajax_url, function(data) {
+
+	if(data.total>0){
+
+		
+
+		$("#csdn123_searchresult").html("");
+
+		csdn123_getRemoteUrlContent(data.items[0].url);
+
+		var csdn123_i=0;		
+
+		for(csdn123_i=0;csdn123_i<data.items.length;csdn123_i++)
+
+		{
+
+			$("<option value='" + data.items[csdn123_i].url + "' csdn123fromurl='" + data.items[csdn123_i].fromurl + "'>" + data.items[csdn123_i].title + "</option>").appendTo("#csdn123_searchresult");
+
+		}
+
+	}  else {
+
+		alert("{lang csdn123_news:backstage_more_conten}");
+
+		$("#csdn123keyword").focus();
+
+	}
+
+	$("#csdn123_loading").html("");
+
+	$("#csdn123_someNews").show();
+
+	});	
+
+	});
+
+	
+
+	$("#csdn123_newsPre,#csdn123_newsNext").click(function(){
+
+		
+
+		var csdn123_sel_index=$("#csdn123_searchresult option:selected").index();
+
+		if($(this).text()=="{lang csdn123_news:previous_article}")
+
+		{
+
+			csdn123_sel_index--;
+
+		} else {
+
+			csdn123_sel_index++;
+
+		}
+
+		if(csdn123_sel_index<=0)
+
+		{
+
+			csdn123_sel_index=0;
+
+		}
+
+		if(csdn123_sel_index>=$("#csdn123_searchresult option").length)
+
+		{
+
+			csdn123_sel_index--;
+
+		}
+
+		var csdn123_preObj=$("#csdn123_searchresult option").eq(csdn123_sel_index);
+
+		csdn123_preObj.attr('selected','selected');
+
+		csdn123_getRemoteUrlContent(csdn123_preObj.val());
+
+		
+
+	});
+
+	
+
+	$("#csdn123_someNews").click(function(){
+
+		$("#csdn123_query").click();
+
+	});
+
+
+
+	$("#csdn123_tongyici").click(function(){
+
+		
+
+		$("#csdn123_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />');
+
+		var csdn123_contentHtmlCode=$("#e_iframe").contents().find("body").html();
+
+		if(csdn123_contentHtmlCode.length<20)
+
+		{
+
+			alert("{lang csdn123_news:editor_empty}");
+
+			$("#csdn123_loading").html('');
+
+			return;
+
+		}
+
+		$.get("{$_G['siteurl']}plugin.php?id=csdn123_news:csdn123_fun&originality=yes",function(data){
+
+			
+				if(data.indexOf('=')==-1)
+				{
+					alert("{lang csdn123_news:not_add_original}");
+					$("#csdn123_loading").html('');
+					return false;
+				}
+				
+				var csdn123_tempTongyiciArr;
+				
+				data=data.split(",");				
+				
+				for(var csdn123_i=0;csdn123_i<data.length;csdn123_i++)
+
+				{
+
+					csdn123_tempTongyiciArr=data[csdn123_i].split("=");
+
+					csdn123_contentHtmlCode=csdn123_contentHtmlCode.replace(csdn123_tempTongyiciArr[0],csdn123_tempTongyiciArr[1]);
+
+				}
+
+				csdn123_contentHtmlCode=csdn123_contentHtmlCode.replace(/_hzw_/ig,"");
+
+				$("#e_iframe").contents().find("body").html(csdn123_contentHtmlCode);
+
+				$("#csdn123_loading").html('');
+
+			
+
+			})
+
+		
+
+	});
+
+	
+
+	$("#csdn123_likearticle").click(function(){
+
+
+
+		$("#csdn123_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />');
+
+		var csdn123_likearticleData=$("#e_iframe").contents().find("body").text();
+
+		csdn123_likearticleData=csdn123_likearticleData + $("#subject").val();
+
+		csdn123_likearticleData=csdn123_likearticleData.replace(/[^\u4e00-\u9fa5]/g,'');
+
+		if(csdn123_likearticleData.length<5)
+
+		{
+
+			$("#csdn123_loading").html('');
+
+			return;
+
+		}
+
+		csdn123_likearticleData=encodeURIComponent(csdn123_likearticleData);
+
+		$.post("{$_G['siteurl']}plugin.php?id=csdn123_news:csdn123_fun","likearticleData=" + csdn123_likearticleData,function(data){
+
+			
+
+			$("#csdn123keyword").val(data);
+
+			$("#csdn123_query").click();
+
+			$("#csdn123_loading").html('');
+
+			
+
+		},"json");
+
+				
+
+	});
+
+
+	$("#csdn123_searchresult").change(function(){
+
+	
+
+		csdn123_CurrentRemoteUrl=$(this).children('option:selected').val();
+
+		if(csdn123_CurrentRemoteUrl.indexOf("http")!=-1)
+
+		{
+
+			csdn123_getRemoteUrlContent(csdn123_CurrentRemoteUrl);
+
+		}
+
+	
+
+	
+
+	});
+
+	
+
+	$("#csdn123_localimgae").click(function(){
+
+		
+
+		$("#csdn123_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />');
+
+		if($("#csdn123_tishi_historykeyword").html()=="" && confirm("{lang csdn123_news:probably_very_crowded}")==false)
+
+		{
+
+			$("#csdn123_loading").html('');
+
+			return false;
+
+		}
+
+		var csdn123_htmlcode=$("#e_iframe").contents().find("body").html();
+
+		var csdn123_imgPatt = /<img[^<>]*src\s*=\s*(['"]?)([^'"<>]*)\\1(?=\s|\/|>)/img
+
+		var csdn123_imgRegStr=csdn123_htmlcode.match(csdn123_imgPatt);
+
+		if(!csdn123_imgRegStr)
+
+		{
+
+			$("#csdn123_loading").html('');
+
+			return false;
+
+		}
+
+		for(var csdn123_i=0;csdn123_i<csdn123_imgRegStr.length;csdn123_i++)
+
+		{
+
+			var csdn123_imgValue=csdn123_imgRegStr[csdn123_i];
+
+			var csdn123_imgValue_arr=csdn123_imgValue.match(/<img[^>]*src\s*=\s*(['"]?)([^'">]*)\\1/i);
+
+			csdn123_imgValue=csdn123_imgValue_arr[2];
+
+			$.ajax({async:false,cache:false,data:"id=csdn123_news:csdn123_fun&csdn123_localimg=yes&csdn123_localimgUrl="+encodeURIComponent(csdn123_imgValue),type:"GET",url:"{$_G['siteurl']}plugin.php",success:function(data){
+
+			
+
+				csdn123_htmlcode=csdn123_htmlcode.replace(csdn123_imgValue,data);
+
+			
+
+			}})
+
+
+
+				
+
+		}
+
+		$("#e_iframe").contents().find("body").html(csdn123_htmlcode);
+
+		$("#e_downremoteimg").click();
+
+		$("#csdn123_loading").html('');
+
+
+
+	});
+
+	$("#csdn123_fromurl").click(function(){
+
+	
+
+		var csdn123fromurl=$("#csdn123_searchresult option:selected").attr("csdn123fromurl");
+
+		if(csdn123fromurl && csdn123fromurl.indexOf("http")!=-1)
+
+		{
+
+			$("#e_iframe").contents().find("body").append("<br><br>{lang csdn123_news:source_address}{lang csdn123_news:colon}" + csdn123fromurl);
+
+			alert("{lang csdn123_news:source_address_bottom}");
+
+		}
+
+
+
+	});
+
+	$("#csdn123_textformat").click(function(){
+
+		
+
+		$("#e_iframe").contents().find("body").find("p").before("<span>&nbsp;&nbsp;&nbsp;&nbsp;<span>");
+
+		$("#e_iframe").contents().find("body").find("p").after("<br>");
+
+		$("#e_iframe").contents().find("body").find("img").before("<br>");
+
+		$("#e_iframe").contents().find("body").find("img").after("<br>");
+
+		
+
+	});
+
+	$("#csdn123_reset").click(function(){
+
+	
+
+		if(csdn123_remoteUrl.indexOf("http")!=-1)
+
+		{
+
+			csdn123_getRemoteUrlContent(csdn123_remoteUrl);
+
+		}
+
+	
+
+	});
+
+	$("#csdn123_jian,#csdn123_fan").click(function(){
+
+	
+
+		$("#csdn123_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />');
+
+		var csdn123_contentHtmlCode=$("#e_iframe").contents().find("body").html();
+
+		var csdn123_jianTextData=$("#e_iframe").contents().find("body").text();
+
+		var csdn123_title=$("#subject").val();
+
+		var convertType="toGBK";		
+
+		csdn123_jianTextData=csdn123_jianTextData + csdn123_title;
+
+		csdn123_jianTextData=csdn123_jianTextData.replace(/[^\u4e00-\u9fa5]/g,'');
+
+		if(csdn123_jianTextData.length<3)
+
+		{
+
+			$("#csdn123_loading").html('');
+
+			return;
+
+		}
+
+		csdn123_jianTextData=encodeURIComponent(csdn123_jianTextData);		
+
+		if($(this).attr("id")=="csdn123_fan")
+
+		{
+
+			convertType="toBIG";
+
+		}
+
+		$.post("{$_G['siteurl']}plugin.php?id=csdn123_news:csdn123_fun","convertType=" + convertType + "&csdn123_jianTextData=" + csdn123_jianTextData,function(data){
+
+			
+
+			var csdn123_tempTextDataArr;			
+
+			for(var csdn123_i=0;csdn123_i<data.length;csdn123_i++)
+
+			{
+
+				csdn123_tempTextDataArr=data[csdn123_i].split("=");
+
+				csdn123_regexp=csdn123_tempTextDataArr[0];
+
+				var csdn123_regexp=new RegExp(csdn123_regexp,"ig");
+
+				csdn123_contentHtmlCode=csdn123_contentHtmlCode.replace(csdn123_regexp,csdn123_tempTextDataArr[1]);
+
+				csdn123_title=csdn123_title.replace(csdn123_regexp,csdn123_tempTextDataArr[1]);
+
+			}
+
+			$("#e_iframe").contents().find("body").html(csdn123_contentHtmlCode);
+
+			$("#subject").val(csdn123_title);
+
+			$("#csdn123_loading").html('');
+
+
+
+		},"json")
+
+		
+
+	});
+
+		
+
+
+
+})( csdn123_jQ, window);
+
+
+
+function csdn123_keyword(str)
+
+{
+
+	csdn123_jQ("#csdn123keyword").val(str);
+
+	csdn123_jQ("#csdn123_query").click();
+
+}
+
+
+
+function csdn123_getRemoteUrlContent(url)
+{
+	switchEditor(1);
+
+	csdn123_remoteUrl=url;
+
+	csdn123_jQ("#csdn123_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />');
+
+	csdn123_catchUrl="{$_G['siteurl']}plugin.php?id=csdn123_news:csdn123_fun&getremoteurl=yes&cms=dz&ip={$_SERVER['REMOTE_ADDR']}&siteur1=" + _csdn123_siteurl  + "&s1teur1=" + _csdn123_s1teurl + "&url="+ encodeURIComponent(url) +"&csdn123content=?";
+
+	csdn123_jQ.getJSON(csdn123_catchUrl,function(data){
+
+		
+
+			if(data.status=="ok")
+
+			{
+
+				csdn123_jQ("#subject").val(data.title);
+				
+				csdn123_jQ("#tags").val(data.tags_word);
+
+				var csdn123_data_content=data.content;
+
+				csdn123_data_content=csdn123_data_content.replace(/http:\/\/www.csdn123.net\/mydata\/showimg\.php/g,csdn123_showimg);
+
+				csdn123_data_content=csdn123_data_content.replace(/http:\/\/www.csdn123.net\/mydata\/zhihuimg\.php/g,csdn123_showimg);
+
+				csdn123_data_content=csdn123_data_content.replace(/http:\/\/www.csdn123.net\/mydata\/nicimg\.php/g,csdn123_showimg);
+
+				csdn123_data_content=csdn123_data_content.replace(/http:\/\/www.csdn123.net\/mydata\/showbaiduimg\.php/g,csdn123_showimg);
+				
+				csdn123_data_content=csdn123_data_content.replace(/http:\/\/www.csdn123.net\/zd_version\/zd9\/display_picture\.php/g,csdn123_showimg);
+
+				csdn123_jQ("#e_iframe").contents().find("body").html(csdn123_data_content);
+
+				csdn123_jQ("#csdn123_loading").html('');
+
+				csdn123_jQ("#csdn123_moreGongNeng,#csdn123_moreGongNeng2").show();
+
+			}
+
+		
+
+	});
+
+
+
+}
+
+
+
+function csdn123_getcookies(csdn123keywordQuery)
+
+{
+
+	if(csdn123keywordQuery.indexOf("http")!=-1 || csdn123keywordQuery.length>5)
+
+	{
+
+		return false;
+
+	}
+
+	var csdn123TempCookies=csdn123_jQ.cookie("csdn123");
+
+	if(csdn123TempCookies==undefined && csdn123keywordQuery=="")
+
+	{
+
+		return false;
+
+		
+
+	}else if(csdn123keywordQuery!=""){
+
+		
+
+		if(csdn123TempCookies && csdn123TempCookies.indexOf("|")>0)
+
+		{
+
+			csdn123TempCookies=csdn123TempCookies.replace(csdn123keywordQuery + "|","");
+
+		}
+
+		if(csdn123TempCookies==undefined)
+
+		{
+
+			csdn123TempCookies=csdn123keywordQuery + "|";
+
+		} else {
+
+			csdn123TempCookies=csdn123keywordQuery + "|" + csdn123TempCookies;
+
+		}
+
+	}
+
+	csdn123_jQ.cookie("csdn123",csdn123TempCookies);
+
+	var csdn123TempCookiesArr=csdn123TempCookies.split("|");
+
+	var csdn123_j=0;
+
+	var csdn123_cookieKeyword="";
+
+	for(csdn123_j=0;csdn123_j<csdn123TempCookiesArr.length;csdn123_j++)
+
+	{
+
+		if(csdn123TempCookiesArr[csdn123_j]!="" && csdn123TempCookiesArr[csdn123_j]!="undefined")
+
+		{
+
+			csdn123_cookieKeyword+="<a href=\"javascript:csdn123_keyword('" + csdn123TempCookiesArr[csdn123_j] + "')\">" + csdn123TempCookiesArr[csdn123_j] + "</a>&nbsp;|&nbsp;"
+
+		}
+
+		if(csdn123_j>16)
+
+		{
+
+			break;
+
+		}
+
+	}
+
+	csdn123_jQ("#csdn123_tishi_historykeyword").html(csdn123_cookieKeyword);
+
+}
+
+csdn123_getcookies("");
+
+</script> 
+
+<!--{/block}-->

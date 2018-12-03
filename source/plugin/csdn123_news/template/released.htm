@@ -1,0 +1,80 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&selall=yes" id="cpform">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="zhiwu" id="zhiwu" />
+  <input type="hidden" name="page" value="{$page}" />
+  <table class="tb tb2 nobdb">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="7">{lang csdn123_news:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="7"><ul>
+            <li>{lang csdn123_news:released_prompt01}</li>
+            <li>{lang csdn123_news:released_prompt02}</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="7">
+        	<div style="margin-top:16px;margin-bottom:16px;">
+            
+                <a href="?{$server_url}&baidu_seo_all=yes&formhash={FORMHASH}" class="addtr" onClick="this.innerHTML='{lang csdn123_news:push_in}'">{lang csdn123_news:baidu_seo_all}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:if(confirm('{lang csdn123_news:clears_all}')){window.location.href='?{$server_url}&clears_all=yes&formhash={FORMHASH}';}" class="addtr" style="background-position-y:-286px">{lang csdn123_news:clears_all}</a> 
+                
+            </div>
+       </td>
+      </tr>
+      <tr class="header">
+        <th>&nbsp;&nbsp;</th>
+        <th>&nbsp;&nbsp;</th>
+        <th>{lang csdn123_news:title}</th>
+        <th>{lang csdn123_news:release_column}</th>
+        <th>{lang csdn123_news:release_time}</th>        
+        <th>{lang csdn123_news:publication_mode}</th>
+        <th>{lang csdn123_news:edit}</th>
+      </tr>
+      
+      <!--{loop $news_list $news}-->
+      
+      <tr class="hover">
+        <td><input type="checkbox" value="{$news['ID']}" name="idarray[]" /></td>
+        <td><a href="{eval echo preview_url($news['forum_portal'],$news['tid_aid']);}" target="_blank">{lang csdn123_news:view_release}</a></td>
+        <td><a href="{eval echo show_sourcelink($news['fromurl'],$news['source_link'])}" target="_blank">{$news['title']}</a></td>
+        <td><!--{eval echo getclassname($news['threadtypeid'],$news['fid'],$news['portal_catid'],$news['forum_portal'],$news['group_fid'])}--></td>
+        <td><!--{date($news['send_datetime'])}--></td>
+        <td><!--{if $news['catch_way']=='autocatch'}-->{lang csdn123_news:automatic_release}<!--{else}-->{lang csdn123_news:manual_publishing}<!--{/if}--></td>        
+      	<td><a href="{eval echo edit_url($news);}" target="_blank">{lang csdn123_news:edit}</a></td>
+      </tr>
+      
+      <!--{/loop}-->
+      
+      <tr>
+        <td colspan="6"><div style="margin:8px 0;">
+            <input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll('prefix', this.form, 'idarray', 'chkall')" />
+            <label for="chkall">{lang csdn123_news:select_all}</label>
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="{lang csdn123_news:delete_all}" name="seldelete" class="btn" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="{lang csdn123_news:push_all_seo}" name="selpostbaidu" class="btn" onClick="this.value='{lang csdn123_news:push_in}'" />
+          </div></td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pg" style="margin-top:16px;margin-bottom:32px;">  	
+    
+    <!--{if $newsCount>0}-->
+    <a href="?{$homePage}&formhash={FORMHASH}">{lang csdn123_news:homepage}</a>
+  	<a href="?{$prePage}&formhash={FORMHASH}">{lang csdn123_news:previous_page}</a>
+    &nbsp;&nbsp;{$showPage}&nbsp;&nbsp; 
+    <a href="?{$nextPage}&formhash={FORMHASH}">{lang csdn123_news:next_page}</a>
+    <a href="?{$endPage}&formhash={FORMHASH}">{lang csdn123_news:end_page}</a>&nbsp;&nbsp;
+    <em>{$TotalNumber}</em>
+    <!--{/if}-->
+    
+</div> 
+</form>
+<script>
+if(window.location.host.length>5)
+{
+	document.getElementById('zhiwu').value="http://" + window.location.host;
+}
+</script>

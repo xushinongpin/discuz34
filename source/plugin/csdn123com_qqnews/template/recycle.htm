@@ -1,0 +1,81 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&seldelsmt=yes" id="cpform">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="page" value="{$page}" />
+  <table class="tb tb2 nobdb">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="5">{lang csdn123com_qqnews:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="5"><ul>
+			<li style="font-weight:bold">{lang csdn123com_qqnews:forwarding_tips}</li>
+            <li>{lang csdn123com_qqnews:recycle_prompt01}</li>
+            <li>{lang csdn123com_qqnews:recycle_prompt02}</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="4">
+        	<div style="margin:16px;">
+            
+                <a href="javascript:if(confirm('{lang csdn123com_qqnews:original_clears_all}')){window.location.href='?{$server_url}&seldelsmt=yes&clearall=yes&formhash={FORMHASH}';}" class="addtr" style="background-position-y:-286px">{lang csdn123com_qqnews:empty_trash}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="javascript:if(confirm('{lang csdn123com_qqnews:restore_all_deleted}')){window.location.href='?{$server_url}&seldelsmt=yes&restoreall=yes&formhash={FORMHASH}';}" class="addtr">{lang csdn123com_qqnews:restore_all_deleted}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+           
+            </div>
+       </td>
+      </tr>    
+      <tr class="header">
+        <th>&nbsp;&nbsp;</th>
+        <th>{lang csdn123com_qqnews:title}</th>
+        <th>{lang csdn123com_qqnews:release_column}</th>
+        <th>&nbsp;&nbsp;</th>
+      </tr>
+      
+      <!--{loop $news_list $news}-->
+      
+      <tr class="hover">
+        <td><input type="checkbox" value="{$news['ID']}" name="idarray[]" /></td>
+        <td><a href="{eval echo show_sourcelink($news['source_link'],$news['fromurl'])}" target="_blank">{$news['title']}</a></td>
+        <td><!--{eval echo getclassname($news['threadtypeid'],$news['fid'],$news['portal_catid'],$news['forum_portal'],$news['group_fid'])}--></td>
+     	<td>
+        
+            <a href="?{$server_url}&canceldel={$news['ID']}&page={$page}&formhash={FORMHASH}">{lang csdn123com_qqnews:recovery}</a>
+            &nbsp;|&nbsp;
+            <a href="?{$server_url}&del={$news['ID']}&page={$page}&formhash={FORMHASH}">{lang csdn123com_qqnews:delete_completely}</a>
+            
+     	</td>
+      </tr>
+      
+      <!--{/loop}-->
+      
+      <tr>
+        <td colspan="4">
+        
+        <div style="margin:8px 0;">
+        
+            <input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll('prefix', this.form, 'idarray', 'chkall')" /><label for="chkall">{lang csdn123com_qqnews:select_all}</label>
+            &nbsp;&nbsp;
+            <input type="submit" value="{lang csdn123com_qqnews:delete_all}" name="seldelete" class="btn" />
+            &nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="submit" value="{lang csdn123com_qqnews:restore_all}" name="selcancel" class="btn" />
+            
+        </div>
+        
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</form>
+
+<div class="pg" style="margin-top:16px;margin-bottom:32px;">  	
+    
+    <!--{if $newsCount>0}-->
+    <a href="?{$homePage}&formhash={FORMHASH}">{lang csdn123com_qqnews:homepage}</a>
+  	<a href="?{$prePage}&formhash={FORMHASH}">{lang csdn123com_qqnews:previous_page}</a>
+    &nbsp;&nbsp;{$showPage}&nbsp;&nbsp; 
+    <a href="?{$nextPage}&formhash={FORMHASH}">{lang csdn123com_qqnews:next_page}</a>
+    <a href="?{$endPage}&formhash={FORMHASH}">{lang csdn123com_qqnews:end_page}</a>&nbsp;&nbsp;
+    <em>{$TotalNumber}</em>
+    <!--{/if}-->
+    
+</div>
+

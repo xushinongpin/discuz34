@@ -1,0 +1,275 @@
+<script src="source/plugin/csdn123com_zaker/res/jquery.min.js"></script>
+
+<form action="?{$server_url}&catchrandnews=yes" method="post" id="form1">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <table class="tb tb2 ">
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:where_is_content_imported}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked" id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum" checked="checked">
+            &nbsp;{lang csdn123com_zaker:import_to_forum}</li>
+          <li id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal">
+            &nbsp;{lang csdn123com_zaker:import_to_portal}</li>
+          <li id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group">
+            &nbsp;{lang csdn123com_zaker:import_group}</li>  
+        </ul></td>
+      <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+    </tr>
+    <tbody id="forum_panel">
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:all_sections_of_forum}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><select name="fid" id="fid" onChange="ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + this.value, 'threadtypes');">
+            
+            <!--{eval echo forumselect(FALSE, 0, 0, TRUE)}-->
+            
+          </select></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:subject_classification}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+        <td class="vtop rowform"><span id="threadtypes">
+          <select name="threadtypeid">
+            <option value="0"></option>
+          </select>
+          </span></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="portal_panel" style="display:none">
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:all_columns_of_portal}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><!--{eval echo category_showselect('portal', 'portal_catid', false)}--></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="group_panel" style="display:none">
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:all_groups}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform">
+        	
+            <select name="group_fid">
+            <!--{loop $grouplistArr $groupValue}-->
+            <option value="{$groupValue['fid']}">{$groupValue['name']}</option>
+            <!--{/loop}-->
+            </select>
+            
+        </td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:replies_count}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="replaynum"  type="text" class="txt" value="20"></td>
+      <td class="vtop tips2" s="1">
+			<strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:replies_count_prompt}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:which_user_is_publishing}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="first_uid"  type="text" class="txt" value="{eval echo getRndUid(); }"></td>
+      <td class="vtop tips2" s="1">
+      <!--{if majia_chk()}-->
+      	<a href="{$regvest_url}" style="color:red;text-decoration:none">{lang csdn123com_zaker:vest_empty}</a>
+      <!--{else}-->
+      	<strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:which_user_is_publishing_prompt}
+      <!--{/if}-->
+      </td>
+    </tr>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:replyuser_uid}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="reply_uid"  type="text" class="txt" value="{eval echo getRndUid(); }"></td>
+      <td class="vtop tips2" s="1">
+      <!--{if majia_chk()}-->
+      	<a href="{$regvest_url}" style="color:red;text-decoration:none">{lang csdn123com_zaker:vest_empty}</a>
+      <!--{else}-->
+      	<strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:replyuser_uid_prompt}
+      <!--{/if}-->
+      </td>
+    </tr>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:intval_time}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="intval_time"  type="text" class="txt" value="3600"></td>
+      <td class="vtop tips2" s="1">
+      	<strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:intval_time_prompt}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:display_source_link}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li>
+            <input class="radio" type="radio" name="display_link" value="1">
+            &nbsp;{lang csdn123com_zaker:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="display_link" value="0" checked="checked">
+            &nbsp;{lang csdn123com_zaker:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:display_source_link_prompt}</td>
+    </tr>	
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:filter_image}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);" id="chk_filter_image">
+          <li>
+            <input class="radio" type="radio" name="filter_image" value="1">
+            &nbsp;{lang csdn123com_zaker:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="filter_image" value="0" checked="checked">
+            &nbsp;{lang csdn123com_zaker:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:filter_image_prompt}</td>
+    </tr>
+	<tbody id="image_setting">
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:image_localized_in_storage}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked">
+            <input class="radio" type="radio" name="image_localized" value="1" checked="checked">
+            &nbsp;{lang csdn123com_zaker:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="image_localized" value="0">
+            &nbsp;{lang csdn123com_zaker:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:image_localized_in_storage_prompt}</td>
+    </tr>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:image_center}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li>
+            <input class="radio" type="radio" name="image_center" value="1">
+            &nbsp;{lang csdn123com_zaker:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="image_center" value="0" checked="checked">
+            &nbsp;{lang csdn123com_zaker:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:image_center_prompt}</td>
+    </tr>
+	</tbody>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:pseudo_original}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li>
+            <input class="radio" type="radio" name="pseudo_original" value="1">
+            &nbsp;{lang csdn123com_zaker:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="pseudo_original" value="0" checked="checked">
+            &nbsp;{lang csdn123com_zaker:select_no}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:pseudo_original_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:chinese_encoding_type}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="0" checked="checked">
+            &nbsp;{lang csdn123com_zaker:non_conversion}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="1">
+            &nbsp;{lang csdn123com_zaker:traditional}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="2">
+            &nbsp;{lang csdn123com_zaker:simplified}</li>
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:chinese_encoding_type_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:views}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="views"  type="text" class="txt" value="{eval echo rand(1,1000);}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:views_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_zaker:release_time}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="release_time"  type="text" class="txt" value="{$release_time}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_zaker:prompt}</strong>{lang csdn123com_zaker:release_time_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="15"><br />
+        <div class="fixsel">
+          <input type="submit" class="btn" value="{lang csdn123com_zaker:confirm_collection}" onClick="this.value='{lang csdn123com_zaker:wait_moment}'">
+        </div></td>
+    </tr>
+  </table>
+</form>
+<script>
+var csdn123_jQ = jQuery.noConflict(true);
+(function ( $, window, undefined ) {
+	
+	$("#forum").click(function(){
+	
+		$("#forum_panel").show();
+		$("#portal_panel").hide();
+		$("#group_panel").hide();	
+		
+	});
+
+	$("#portal").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").show();
+		$("#group_panel").hide();	
+		
+	});
+	
+	$("#group").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").hide();
+		$("#group_panel").show();	
+		
+	});
+	
+	$("#chk_filter_image").click(function(){
+	
+		var chkImgNum=$("input[name='filter_image']:checked").val();
+		if(chkImgNum==1)
+		{
+			$("#image_setting").hide();
+		} else {
+			$("#image_setting").show();
+		}
+	
+	});
+	
+	
+	
+})( csdn123_jQ, window);
+</script> 
+<script defer>
+var hze_fid=document.getElementById('fid').value;
+ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + hze_fid, 'threadtypes');
+</script> 

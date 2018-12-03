@@ -1,0 +1,49 @@
+<table class="tb tb2 nobdb">
+	<tbody>
+		<tr>
+			<td class="tipsblock" s="1" colspan="3">
+			  <ul>
+				<li>{lang csdn123_news:url_prompt01}</li>
+				<li>{lang csdn123_news:url_prompt02}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html" target="_blank">http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html</a></li>
+			  </ul>
+		   </td>
+		</tr>
+		<tr>
+			<td colspan="3">
+			<div style="height:50px;line-height:50px;padding-left:10px;">
+			
+				<a href="?{$server_url}&step1=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:hzw_hint02}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="?{$server_url}&sendid=zero&formhash={FORMHASH}" class="addtr">{lang csdn123_news:single_page_content}</a>&nbsp;&nbsp;&nbsp;&nbsp; 				
+				<a href="?{$server_url}&rule_input=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:import_rule}</a>
+				
+			</div>
+			</td>
+		</tr>
+		<tr class="header">
+			<th>ID</th>
+			<th>{lang csdn123_news:hzw_hint03}</th>
+			<th>{lang csdn123_news:hzw_hint04}</th>
+			<th>{lang csdn123_news:hzw_hint05}</th>
+			<th>-</th>	
+		</tr>		
+		{loop $ruleRs $ruleItem}
+		<tr class="hover">
+			<td width="80">{$ruleItem["ID"]}</td>
+			<td>{$ruleItem["start_url"]}</td>
+			<td>{$ruleItem["catch_num"]}</td>
+			<td>{if !empty($ruleItem["catch_time"])} {date($ruleItem["catch_time"])} {/if}</td>
+			<td width="300">
+				<a href="?{$server_url}&start_run={$ruleItem['ID']}&formhash={FORMHASH}" onclick="document.getElementById('start_run{$ruleItem['ID']}').innerHTML='<strong>{lang csdn123_news:hzw_hint06}</strong>'" id="start_run{$ruleItem['ID']}">{lang csdn123_news:hzw_hint07}</a>
+				&nbsp;&nbsp;
+				<a href="?{$server_url}&start_run={$ruleItem['ID']}&purehand=yes&formhash={FORMHASH}&start_url={eval echo urlencode($ruleItem['start_url'])}">{lang csdn123_news:hzw_hint12}</a>
+				&nbsp;&nbsp;
+				<a href="?{$server_url}&export_rule={$ruleItem['ID']}&formhash={FORMHASH}">{lang csdn123_news:hzw_hint08}</a>
+				&nbsp;&nbsp;
+				<a href="?{$server_url}&rulemodify={$ruleItem['ID']}&step1=yes&formhash={FORMHASH}">{lang csdn123_news:modify}</a>
+				&nbsp;&nbsp;
+				<a href="?{$server_url}&ruledel={$ruleItem['ID']}&formhash={FORMHASH}">{lang csdn123_news:delete}</a>
+			</td>
+		</tr>
+		{/loop}		
+	</tbody>
+</table>

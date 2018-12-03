@@ -1,0 +1,43 @@
+<!--{block return}-->
+<style>
+.freeaddon_collect_toutiao_gather{padding:10px;background-color: #FAFAFA;margin:10px 0; border: 1px solid #E0E0E0;}
+</style>
+<div class="freeaddon_collect_toutiao_gather" id="freeaddon_collect_toutiao_gather" {if !$splugin_setting[showpost]}style="display:none;"{/if}>
+	<div class="freeaddon_collect_toutiao_gathertips">
+		<div style="margin-bottom: 5px;">
+		<img src="static/image/common/notice.gif" align="absmiddle">
+		$splugin_setting[tips]
+		</div>
+	</div>
+	
+	<div class="sppoll">
+	<input type="text" name="freeaddon_collect_toutiao_url" id="freeaddon_collect_toutiao_url" class="px" x-webkit-speech="" speech="" value="" size="80" />
+	<button type="button" name="freeaddon_collect_toutiao_button" id="freeaddon_collect_toutiao_button" class="pn vm" style="vertical-align:top;"><em>&#x83B7;&#x53D6;</em></button>
+	<span id="freeaddon_collect_toutiao_loading"></span>
+	</div>
+	<div class="mtn"></div>
+</div>
+
+<script src="source/plugin/freeaddon_collect_toutiao/images/jquery.min.js"></script>
+<script type="text/javascript">
+jQuery.noConflict();
+jQuery("#freeaddon_collect_toutiao_button").click(function(){
+  var toutiao_url = encodeURIComponent($('freeaddon_collect_toutiao_url').value);
+  var rand = Math.random();
+  jQuery("#freeaddon_collect_toutiao_loading").html('<img src="' + STATICURL + 'image/common/loading.gif" alt="loading" />&#x6B63;&#x5728;&#x8BFB;&#x53D6;&#x6570;&#x636E;...');
+  var surl = "plugin.php?id=freeaddon_collect_toutiao"+"&url="+ toutiao_url +"&r="+ rand + "&formhash={FORMHASH}";
+  jQuery.getJSON(surl, function(data) {
+	  if(data.downremoteimg == '1'){
+	  	switchEditor(1);
+	  	parent.ATTACHORIMAGE = 1;
+			parent.updateDownImageList(data.message);
+	  }else{
+	  	if(wysiwyg) {editdoc.body.innerHTML = data.message;switchEditor(0);switchEditor(1)} else {textobj.value = data.message;}
+	  }
+	  $("subject").value= data.subject;
+	  $("subject").focus();
+	  jQuery("#freeaddon_collect_toutiao_loading").html(data.statustext);
+  });
+});
+</script>
+<!--{/block}-->

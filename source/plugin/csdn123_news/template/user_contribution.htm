@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="{CHARSET}">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>{lang csdn123_news:user_contribution}</title>
+<link rel="stylesheet" href="{$_G['siteurl']}source/plugin/csdn123_news/template/weui.css"/>
+</head>
+<body ontouchstart>
+<form action="{$_G['siteurl']}plugin.php?id=csdn123_news:user_contribution&mobile=no&contribution=yes" method="post">
+<input type="hidden" value="{FORMHASH}" name="formhash" />
+<input type="hidden" name="zhiwu" id="zhiwu" />
+  <div class="container" id="container">
+    <div class="weui-cells__title">
+      <h2>{lang csdn123_news:enter_url}</h2>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <textarea class="weui-textarea" name="url" placeholder="http://" rows="3"></textarea>
+        </div>
+      </div>
+    </div>
+    <div class="weui-cells weui-cells_form">
+      <div class="weui-cell">
+        <div class="weui-cell__bd">
+          <input type="submit" class="weui-btn weui-btn_primary" value="{lang csdn123_news:confirm_contribution}">
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<script>
+if(window.location.host.length>5)
+{
+	document.getElementById('zhiwu').value="http://" + window.location.host;
+}
+</script>
+</body>
+</html>

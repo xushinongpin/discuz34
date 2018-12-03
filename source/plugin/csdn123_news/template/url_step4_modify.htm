@@ -1,0 +1,323 @@
+<script src="source/plugin/csdn123_news/res/jquery.min.js"></script>
+
+<form action="?{$server_url}&step5=yes&rulemodify={$id}" method="post" id="form1">
+<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<input type="hidden" name="step1Str" value="{$step1Str}" />  
+<input type="hidden" name="step2Str" value="{$step2Str}" />  
+<table class="tb tb2 ">
+	<tr>
+	<th class="partition" colspan="2">
+	{lang csdn123_news:url_step_prompt}&nbsp;&nbsp;	
+	<span style="color:#ccc">{lang csdn123_news:url_step1}</span>
+	&nbsp;<span style="color:#ccc">{lang csdn123_news:url_step2}</span>
+	&nbsp;<span style="color:#77c402">{lang csdn123_news:url_step3}</span>
+	</th>
+	</tr>
+	<tr>
+	<td class="tipsblock" s="1" colspan="2">
+	  <ul>
+		<li>{lang csdn123_news:url_prompt01}</li>
+		<li>{lang csdn123_news:url_prompt02}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html" target="_blank">http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html</a></li>
+	  </ul>
+   </td>
+	</tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:where_is_content_imported}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+		  {if $step3Arr['forum_portal']=='forum'}	
+          <li class="checked" id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum" checked="checked">
+            &nbsp;{lang csdn123_news:import_to_forum}</li>
+          <li id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal">
+            &nbsp;{lang csdn123_news:import_to_portal}</li>
+          <li id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group">
+            &nbsp;{lang csdn123_news:import_group}</li>
+		  {elseif $step3Arr['forum_portal']=='portal'}
+          <li id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum">
+            &nbsp;{lang csdn123_news:import_to_forum}</li>
+          <li class="checked" id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal" checked="checked">
+            &nbsp;{lang csdn123_news:import_to_portal}</li>
+          <li id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group">
+            &nbsp;{lang csdn123_news:import_group}</li>		  
+		  {else}
+          <li id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum">
+            &nbsp;{lang csdn123_news:import_to_forum}</li>
+          <li id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal">
+            &nbsp;{lang csdn123_news:import_to_portal}</li>
+          <li class="checked" id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group" checked="checked">
+            &nbsp;{lang csdn123_news:import_group}</li>		  
+		  {/if}	
+        </ul></td>
+      <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+    </tr>
+    <tbody id="forum_panel"  {if $step3Arr['forum_portal']!='forum'} style="display:none" {/if}>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:all_sections_of_forum}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><select name="fid" id="fid" onChange="ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + this.value, 'threadtypes');">
+            
+            <!--{eval echo forumselect(FALSE, 0, $step3Arr['fid'], TRUE)}-->
+            
+          </select></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:subject_classification}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+        <td class="vtop rowform"><span id="threadtypes">
+          <select name="threadtypeid" id="threadtypeid">
+              <option value="0"></option>
+              
+              <!--{loop $typeclassArr $typeclass}--> 
+              
+              <!--{if $typeclass['typeid']==$step3Arr['threadtypeid']}-->
+              
+              <option value="{$typeclass['typeid']}" selected>{$typeclass['name']}</option>
+              
+              <!--{else}-->
+              
+              <option value="{$typeclass['typeid']}">{$typeclass['name']}</option>
+              
+              <!--{/if}--> 
+              
+              <!--{/loop}-->
+              
+            </select>
+          </span></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="portal_panel" {if $step3Arr['forum_portal']!='portal'} style="display:none" {/if}>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:all_columns_of_portal}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><!--{eval echo category_showselect('portal', 'portal_catid', false,$step3Arr['portal_catid'])}--></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="group_panel" {if $step3Arr['forum_portal']!='group'} style="display:none" {/if}>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123_news:all_groups}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform">
+        	
+            <select name="group_fid">
+            <!--{loop $grouplistArr $groupValue}-->
+            
+                <!--{if $groupValue['fid']==$step3Arr['group_fid']}-->
+                    <option value="{$groupValue['fid']}" selected>{$groupValue['name']}</option>
+                <!--{else}-->
+                    <option value="{$groupValue['fid']}">{$groupValue['name']}</option>
+                <!--{/if}-->
+                  
+            <!--{/loop}-->
+            </select>
+            
+        </td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:which_user_is_publishing}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="uid"  type="text" class="txt" value="{$step3Arr['uid']}"></td>
+      <td class="vtop tips2" s="1">
+      <!--{if majia_chk()}-->
+      	<a href="{$regvest_url}" style="color:red;text-decoration:none">{lang csdn123_news:vest_empty}</a>
+      <!--{else}-->
+      	<strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:which_user_is_publishing_prompt}
+      <!--{/if}-->
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:display_source_link}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+		  {if $step3Arr['display_link']==1}	
+          <li class="checked">
+            <input class="radio" type="radio" name="display_link" value="1" checked="checked">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="display_link" value="0">
+            &nbsp;{lang csdn123_news:select_no}</li>
+		  {else}
+		  <li>
+            <input class="radio" type="radio" name="display_link" value="1">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="display_link" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:select_no}</li>
+		  {/if}	
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:display_source_link_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:image_localized_in_storage}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          {if $step3Arr['image_localized']==1}	
+		  <li class="checked">
+            <input class="radio" type="radio" name="image_localized" value="1" checked="checked">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="image_localized" value="0">
+            &nbsp;{lang csdn123_news:select_no}</li>
+		  {else}
+		  <li>
+            <input class="radio" type="radio" name="image_localized" value="1">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="image_localized" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:select_no}</li>
+		  {/if}
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:image_localized_in_storage_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:pseudo_original}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          {if $step3Arr['pseudo_original']==1}
+		  <li class="checked">
+            <input class="radio" type="radio" name="pseudo_original" value="1" checked="checked">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="pseudo_original" value="0">
+            &nbsp;{lang csdn123_news:select_no}</li>
+		  {else}
+		  <li>
+            <input class="radio" type="radio" name="pseudo_original" value="1">
+            &nbsp;{lang csdn123_news:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="pseudo_original" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:select_no}</li>
+		  {/if}
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:pseudo_original_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:chinese_encoding_type}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+          {if $step3Arr['chinese_encoding']==0}
+		  <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="0" checked="checked">
+            &nbsp;{lang csdn123_news:non_conversion}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="1">
+            &nbsp;{lang csdn123_news:traditional}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="2">
+            &nbsp;{lang csdn123_news:simplified}</li>
+		  {elseif $step3Arr['chinese_encoding']==1}	
+		  <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="0">
+            &nbsp;{lang csdn123_news:non_conversion}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="1" checked="checked">
+            &nbsp;{lang csdn123_news:traditional}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="2">
+            &nbsp;{lang csdn123_news:simplified}</li>
+		  {else}
+		  <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="0">
+            &nbsp;{lang csdn123_news:non_conversion}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="1">
+            &nbsp;{lang csdn123_news:traditional}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="2" checked="checked">
+            &nbsp;{lang csdn123_news:simplified}</li>
+		  {/if}
+        </ul></td>
+      <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:views}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="views"  type="text" class="txt" value="{$step3Arr['views']}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:views_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123_news:release_time}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="release_time"  type="text" class="txt" value="{$step3Arr['release_time']}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:release_time_prompt}</td>
+    </tr>
+    <tr>
+		<td colspan="2">
+		<input type="button" class="btn" value="{lang csdn123_news:pre_step}" onclick="history.back()">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" class="btn" value="{lang csdn123_news:confirm_modify}" onclick="this.value='{lang csdn123_news:wait_moment}'">
+		</td>
+	</tr>
+  </table>
+</form>
+<script>
+var csdn123_jQ = jQuery.noConflict(true);
+(function ( $, window, undefined ) {
+	
+	$("#forum").click(function(){
+	
+		$("#forum_panel").show();
+		$("#portal_panel").hide();
+		$("#group_panel").hide();	
+		
+	});
+
+	$("#portal").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").show();
+		$("#group_panel").hide();	
+		
+	});
+	
+	$("#group").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").hide();
+		$("#group_panel").show();	
+		
+	});
+	
+	$("#model_catch_ul li").click(function(){
+	
+		if($(this).find("input").attr("value")==2)
+		{
+			$("#rule_select").show();
+		} else {
+			$("#rule_select").hide();
+		}
+	
+	});
+	
+	
+	
+})( csdn123_jQ, window);
+</script> 
+<script defer>
+document.getElementById('zhiwu').value=window.location.href;
+</script> 

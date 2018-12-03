@@ -1,0 +1,43 @@
+  <table class="tb tb2 nobdb">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="7">{lang csdn123_news:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="2"><ul>
+            <li>{lang csdn123_news:contribute_prompt01}</li>
+            <li>{lang csdn123_news:contribute_prompt02} {$_G['siteurl']}plugin.php?id=csdn123_news:user_contribution&mobile=no </li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        	<div style="margin-top:16px;margin-bottom:16px;">
+            
+                <a href="javascript:void(0)" onClick="showDialog('<img src={$qr_code} />','','{lang csdn123_news:qrcode_prompt}');" class="addtr">{lang csdn123_news:contribute_mobile}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="?{$server_single_url}&sendid=zero&formhash={FORMHASH}" class="addtr">{lang csdn123_news:single_page_content}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="?{$server_url}&contribute_close=yes&formhash={FORMHASH}" class="addtr" style="background-position-y:-286px">{lang csdn123_news:contribute_close}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="javascript:if(confirm('{lang csdn123_news:clears_all}')){window.location.href='?{$server_url}&clears_all=yes&formhash={FORMHASH}';}" class="addtr" style="background-position-y:-286px">{lang csdn123_news:clears_all}</a>&nbsp;&nbsp;&nbsp;&nbsp; 
+                
+            </div>
+       </td>
+      </tr>
+      <tr class="header">
+        <th>{lang csdn123_news:contribution_url}</th>
+        <th>&nbsp;&nbsp;</th>
+ 	  </tr>
+      
+      <!--{loop $contribute_list $contribute}-->
+      
+      <tr class="hover">		
+        <td style="width:80%;word-break:break-all"><a href="{$contribute['url']}" target="_blank">{$contribute['url']}</a></td>
+        <td style="width:20%">
+        	<a href="?{$server_single_url}&sendid={$contribute['ID']}&formhash={FORMHASH}">{lang csdn123_news:release}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        	<a href="?{$server_url}&delid={$contribute['ID']}&formhash={FORMHASH}">{lang csdn123_news:delete}</a>
+        </td>
+      </tr>
+      
+      <!--{/loop}-->
+
+    </tbody>
+  </table>
+   

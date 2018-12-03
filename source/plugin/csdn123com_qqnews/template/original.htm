@@ -1,0 +1,66 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&delword=yes" id="cpform" >
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <table class="tb tb2 ">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="5">{lang csdn123com_qqnews:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="5"><ul>
+			<li style="font-weight:bold">{lang csdn123com_qqnews:forwarding_tips}</li>
+            <li>{lang csdn123com_qqnews:original_prompt01}</li>
+            <li>{lang csdn123com_qqnews:original_prompt02}</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+        	<div style="margin-top:4px;margin-bottom:20px;">
+            
+                <a href="?{$server_url}&weiyanchang_auto_import=yes&formhash={FORMHASH}" class="addtr" onClick="this.innerHTML='{lang csdn123com_qqnews:import_loading}'">{lang csdn123com_qqnews:auto_import_thesaurus}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="?{$server_url}&weiyanchang_add=show&formhash={FORMHASH}" class="addtr">{lang csdn123com_qqnews:add_replacement}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="?{$server_url}&weiyanchang_import=show&formhash={FORMHASH}" class="addtr">{lang csdn123com_qqnews:batch_import_pseudo}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="?{$server_url}&weiyanchang_output=yes&formhash={FORMHASH}" class="addtr" style="background-position:-286px -150px">{lang csdn123com_qqnews:export_my_thesaurus}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                <a href="javascript:if(confirm('{lang csdn123com_qqnews:original_clears_all}')){window.location.href='?{$server_url}&weiyanchang_clear=yes&formhash={FORMHASH}';}" class="addtr" style="background-position-y:-286px">{lang csdn123com_qqnews:empty_pseudo_original}</a> 
+            
+            </div>
+       </td>
+      </tr>
+      <tr class="header">
+        <th>&nbsp;&nbsp;</th>
+        <th>ID</th>
+        <th>{lang csdn123com_qqnews:primitive_words}</th>
+        <th>{lang csdn123com_qqnews:synonym_substitution_words}</th>
+        <th>&nbsp;</th>
+      </tr>
+    {loop $weiyanchang_list $weiyanchang_value}
+    <tr class="hover">
+      <td class="td25"><input type="checkbox" name="idarray[]" value="{eval echo dhtmlspecialchars($weiyanchang_value['ID'])}" class="checkbox"></td>
+      <td class="td24">{eval echo dhtmlspecialchars($weiyanchang_value['ID'])}</td>
+      <td>{eval echo dhtmlspecialchars($weiyanchang_value['word1'])}</td>
+      <td>{eval echo dhtmlspecialchars($weiyanchang_value['word2'])}</td>
+      <td><a href="?{$server_url}&modify_id={eval echo dhtmlspecialchars($weiyanchang_value['ID'])}&page={$page}&formhash={FORMHASH}">{lang csdn123com_qqnews:modify}</a></td>
+    </tr>
+    {/loop}
+    <tr>
+      <td colspan="5"><input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll('prefix', this.form, 'idarray', 'chkall')">
+        <label for="chkall">{lang csdn123com_qqnews:select_all}</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" class="btn" id="submit_deletesubmit" name="deletesubmit" value="{lang csdn123com_qqnews:delete}" /></td>
+    </tr>
+    </tbody>
+    
+  </table>
+</form>
+
+<div class="pg" style="margin-top:32px;margin-bottom:32px;">  	
+    
+    <!--{if $weiyanchangCount>0}-->
+    <a href="?{$homePage}&formhash={FORMHASH}">{lang csdn123com_qqnews:homepage}</a>
+  	<a href="?{$prePage}&formhash={FORMHASH}">{lang csdn123com_qqnews:previous_page}</a>
+    &nbsp;&nbsp;{$showPage}&nbsp;&nbsp; 
+    <a href="?{$nextPage}&formhash={FORMHASH}">{lang csdn123com_qqnews:next_page}</a>
+    <a href="?{$endPage}&formhash={FORMHASH}">{lang csdn123com_qqnews:end_page}</a>&nbsp;&nbsp;
+    <em>{$TotalNumber}</em>
+    <!--{/if}-->
+    
+</div>

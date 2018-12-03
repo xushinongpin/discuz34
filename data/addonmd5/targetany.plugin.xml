@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<root>
+	<item id="Title"><![CDATA[Discuz! Addon MD5]]></item>
+	<item id="ID"><![CDATA[targetany.plugin]]></item>
+	<item id="RevisionID"><![CDATA[71652]]></item>
+	<item id="SN"><![CDATA[2018110313ITci4tgThH]]></item>
+	<item id="RevisionDateline"><![CDATA[1535961602]]></item>
+	<item id="Data">
+		<item id="/template/settings.htm"><![CDATA[0327ff1ef4944b3fd2d58e9be1624fa5]]></item>
+		<item id="/admincp.inc.php"><![CDATA[cb1524237dd47e516a67afc3f56c33be]]></item>
+		<item id="/handle.inc.php"><![CDATA[c82bd60a4bab203f822ecf039efa5301]]></item>
+		<item id="/targetany.config.php"><![CDATA[2fed6f5a914b1cf6c0243e0a149b050c]]></item>
+		<item id="/lang/lang-SC_GBK.php"><![CDATA[ec776d010be53378700f8f26512280e1]]></item>
+		<item id="/lang/lang-SC_UTF8.php"><![CDATA[ac6ec89affafc1d3cb3d1ce49d65fc34]]></item>
+		<item id="/lib/function.global.php"><![CDATA[274e079b6436501f737ab20739c09bf2]]></item>
+		<item id="/version.php"><![CDATA[11f0659067001ca0c91c890c4b1a472f]]></item>
+		<item id="/index.html"><![CDATA[d41d8cd98f00b204e9800998ecf8427e]]></item>
+		<item id="/class/basic.class.php"><![CDATA[3454e4779fd8c4a1c1ec4ec9007c1308]]></item>
+		<item id="/class/question.class.php"><![CDATA[51ba13a07426089380af840f8dcf4042]]></item>
+		<item id="/class/member.class.php"><![CDATA[e3564138e5f39559e4e19e2034f47513]]></item>
+		<item id="/class/article.class.php"><![CDATA[c62432eb9125a3f6d0341db3b3dd7f32]]></item>
+		<item id="/discuz_plugin_targetany_SC_GBK.xml"><![CDATA[213e01a1ac4e79dee89334cfb56d2457]]></item>
+		<item id="/discuz_plugin_targetany_SC_UTF8.xml"><![CDATA[9a54be1468a1c204b154cf047c963f0f]]></item>
+	</item>
+</root>

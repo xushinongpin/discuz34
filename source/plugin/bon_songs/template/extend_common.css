@@ -1,0 +1,30 @@
+/** plugin::bon_songs **/
+.bon_songs {background-color:#FFF; overflow:hidden; *zoom:1;}
+.bon_songs_cur, .bon_songs_cur:hover, .bon_songs_item:hover, .bon_songs_close {background-repeat:no-repeat;}
+.bon_songs_tab {width:960px; height:105px; padding:4px 0; margin:0 auto;}
+.bon_songs_item {float:left; width:92px; height:104px; padding:0 2px;  cursor:pointer; display:inline-block; outline:medium none; text-decoration:none; vertical-align:top;}
+.bon_songs_item:hover {background-position:-100px 0px; text-decoration:none;}
+.bon_songs_name {height:15px; line-height:15px; color:#666; font-size:12px; text-align:center; display:block; overflow:hidden;}
+.bon_songs_cur, .bon_songs_cur:hover {width:96px; height:131px; padding:0; background-position:0px 0px; position:relative; z-index:2;}
+.bon_songs_color_blue .bon_songs_item:hover {background-position:-100px 0;}
+.bon_songs_color_black .bon_songs_item:hover {background-position:-100px -150px;}
+.bon_songs_color_orange .bon_songs_item:hover {background-position:-100px -300px;}
+.bon_songs_color_red .bon_songs_item:hover {background-position:-100px -450px;}
+.bon_songs_color_green .bon_songs_item:hover {background-position:-100px -600px;}
+.bon_songs_color_yellow .bon_songs_item:hover {background-position:-100px -750px;}
+.bon_songs_color_purple .bon_songs_item:hover {background-position:-100px -900px;}
+.bon_songs_color_blue .bon_songs_cur, .bon_songs_color_blue .bon_songs_cur:hover {background-position:0 0;}
+.bon_songs_color_black .bon_songs_cur, .bon_songs_color_black .bon_songs_cur:hover {background-position:0 -150px;}
+.bon_songs_color_orange .bon_songs_cur, .bon_songs_color_orange .bon_songs_cur:hover {background-position:0 -300px;}
+.bon_songs_color_red .bon_songs_cur, .bon_songs_color_red .bon_songs_cur:hover {background-position:0 -450px;}
+.bon_songs_color_green .bon_songs_cur, .bon_songs_color_green .bon_songs_cur:hover {background-position:0 -600px;}
+.bon_songs_color_yellow .bon_songs_cur, .bon_songs_color_yellow .bon_songs_cur:hover {background-position:0 -750px;}
+.bon_songs_color_purple .bon_songs_cur, .bon_songs_color_purple .bon_songs_cur:hover {background-position:0 -900px;}
+.bon_songs_player {height:620px; background-repeat:repeat; position:relative;}
+.bon_songs_iframe {width:750px; height:520px; position:absolute; top:50px; left:0;}
+.bon_songs_close {height:19px; line-height:19px; background-position:-217px 5px; color:#FFF; font-weight:bold; padding-left:18px; position:absolute; right:10px; top:30px;}
+.bon_songs_box {width:750px; margin:0 auto; position:relative;}
+.bon_songs_logo {width:56px; height:56px; margin:10px auto 5px; position:relative;}
+.bon_songs_logo img {width:56px; height:56px;}
+.bon_songs_logo i {width:56px; height:56px; background-repeat:no-repeat; position:absolute; left:0; top:0;}
+/** end **/

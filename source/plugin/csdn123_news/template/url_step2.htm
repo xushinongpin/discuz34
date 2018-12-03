@@ -1,0 +1,44 @@
+<form action="?{$server_url}&step3=yes" method="post" id="form1">
+<input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<input type="hidden" name="step1Str" value="{$step1Str}" />
+{if !empty($_GET['rulemodify']) && is_numeric($_GET['rulemodify'])}
+<input type="hidden" name="rulemodify" value="{$_GET['rulemodify']}" />
+{/if}
+<table class="tb tb2 ">
+<tr>
+	<th class="partition" colspan="2">
+	{lang csdn123_news:url_step_prompt}&nbsp;&nbsp;	
+	<span style="color:#77c402">{lang csdn123_news:url_step1}</span>
+	&nbsp;<span style="color:#ccc">{lang csdn123_news:url_step2}</span>
+	&nbsp;<span style="color:#ccc">{lang csdn123_news:url_step3}</span>
+	</th>
+</tr>
+<tr>
+	<td class="tipsblock" s="1" colspan="2">
+	  <ul>
+		<li>{lang csdn123_news:url_prompt01}</li>
+		<li>{lang csdn123_news:url_prompt02}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html" target="_blank">http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html</a></li>
+	  </ul>
+   </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:hzw_hint09}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform" colspan="2">
+	<div style="line-height:18px;height:450px;overflow:auto">
+	{loop $resultArr $hrefLink}
+	{$hrefLink}<br>
+	{/loop}
+	</div>
+  </td>
+</tr>
+<tr>
+	<td colspan="2">
+	<input type="button" class="btn" value="{lang csdn123_news:pre_step}" onclick="history.back()">
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<input type="submit" class="btn" value="{lang csdn123_news:next_step}" onclick="this.value='{lang csdn123_news:wait_moment}'">
+	</td>
+</tr>
+</table>
+</form>

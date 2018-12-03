@@ -1,0 +1,54 @@
+  <table class="tb tb2 nobdb">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="5">{lang csdn123_news:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="5"><ul>
+            <li>{lang csdn123_news:fixedTime_prompt01}<a href="{$_G['siteurl']}plugin.php?id=csdn123_news" target="_blank">{$_G['siteurl']}plugin.php?id=csdn123_news</a></li>
+            <li>{lang csdn123_news:fixedTime_prompt02}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_1025/43.html" target="_blank">{lang csdn123_news:fixedTime_prompt03}</a></li>
+			<li style="margin-top:8px;margin-bottom:16px;font-size:14px;line-height:24px;overflow:auto">
+			<a href="?{$fixed_success_url}" style="color:red;text-decoration:none;">{$fixed_success}</a>
+			</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+        	<div style="margin-top:4px;margin-bottom:20px;">
+            
+                <a href="?{$server_url}&fixedTimeAdd=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:fixedTime_add}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+				<!--{if DISCUZ_VERSION!='X2.5' && $hzw_strict_dingshi==1}-->
+                <a href="{$csdn123_cronUrl}" class="addtr">{lang csdn123_news:fixedTime_setting_runtime}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+				<!--{/if}-->
+                <a href="?{$server_url}&off_timer=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:off_timer_acquisition}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+        		<a href="javascript:if(confirm('{lang csdn123_news:clears_all}')){window.location.href='?{$server_url}&clears_all=yes&formhash={FORMHASH}';}" class="addtr" style="background-position-y:-286px">{lang csdn123_news:clears_all}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+                
+            </div>
+       </td>
+      </tr>      
+      <tr class="header">
+        <th>{lang csdn123_news:keyword}</th>
+        <th>{lang csdn123_news:release_column}</th>
+        <th>{lang csdn123_news:acquisition_times}</th>        
+        <th>{lang csdn123_news:final_acquisition_time}</th>
+        <th>&nbsp;&nbsp;</th>
+      </tr>
+      
+      <!--{loop $cronList $cron}-->
+      
+      <tr class="hover">
+        <td>{$cron['keyword']}</td>
+        <td><!--{eval echo getclassname($cron['threadtypeid'],$cron['fid'],$cron['portal_catid'],$cron['forum_portal'],$cron['group_fid'])}--></td>
+        <td><!--{$cron['catchnum']}--></td>
+        <td><!--{if $cron['catchtime']>0}--><!--{date($cron['catchtime'])}--><!--{/if}--></td>
+        <td>
+        	<a href="?{$server_url}&update_id={$cron['ID']}&formhash={FORMHASH}">{lang csdn123_news:modify}</a>
+            &nbsp;&nbsp;|&nbsp;&nbsp;
+        	<a href="?{$server_url}&del={$cron['ID']}&formhash={FORMHASH}">{lang csdn123_news:delete}</a>
+        </td>
+      </tr>
+      
+      <!--{/loop}-->      
+      
+    </tbody>
+  </table>

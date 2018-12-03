@@ -1,0 +1,87 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&selall=yes" id="cpform">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="page" value="{$page}" />
+  <table class="tb tb2 nobdb">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="5">{lang csdn123com_zaker:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="5"><ul>
+            <li>{lang csdn123com_zaker:pending_prompt01}</li>
+            <li>{lang csdn123com_zaker:pending_prompt02}</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="5">
+        	<div style="margin-top:16px;margin-bottom:16px;">
+
+        		<a class="addtr" href="?{$server_url}&random_content=yes&formhash={FORMHASH}">{lang csdn123com_zaker:random_batch_content}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        		<a class="addtr" href="javascript:if(confirm('{lang csdn123com_zaker:clears_lost_content}')){window.location.href='?{$server_url}&sendfail=yes&formhash={FORMHASH}';}" style="background-position-y:-286px">{lang csdn123com_zaker:clears_lost_content}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        		<a class="addtr" href="javascript:if(confirm('{lang csdn123com_zaker:clears_all}')){window.location.href='?{$server_url}&clears_all=yes&formhash={FORMHASH}';}" style="background-position-y:-286px">{lang csdn123com_zaker:clears_all}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        	
+            </div>
+        </td>
+      </tr>
+      <tr class="header">
+        <th>&nbsp;&nbsp;</th>
+        <th>{lang csdn123com_zaker:title}</th>
+        <th>{lang csdn123com_zaker:release_column}</th>
+        <th>{lang csdn123com_zaker:publication_status}</th>
+        <th>&nbsp;&nbsp;</th>
+      </tr>
+
+      <!--{loop $news_list $news}-->
+      
+      <tr class="hover">
+        <td><input type="checkbox" value="{$news['ID']}" name="idarray[]" /></td>
+        <td><a href="{eval echo show_sourcelink($news['source_link'],$news['fromurl'])}" target="_blank">{eval echo stripcslashes($news['title'])}</a></td>
+        <td><!--{eval echo getclassname($news['threadtypeid'],$news['fid'],$news['portal_catid'],$news['forum_portal'],$news['group_fid'])}--></td>
+        <td><!--{if $news['tid_aid']=='-1'}--><span style="color:red">{lang csdn123com_zaker:publishing_failure}</span><!--{else}-->{lang csdn123com_zaker:waiting_releas}<!--{/if}--></td>
+        <td id="myid{$news['ID']}">
+        
+        	<a href="?{$server_url}&update_id={$news['ID']}&page={$page}&formhash={FORMHASH}">{lang csdn123com_zaker:modify}</a>&nbsp;|&nbsp; 
+            <a href="?{$server_url}&import_id={$news['ID']}&page={$page}&formhash={FORMHASH}" onClick="importtobbs('myid{$news['ID']}')">{lang csdn123com_zaker:release}</a>
+
+        </td>
+      </tr>
+      
+      <!--{/loop}-->
+      
+      <tr>
+        <td colspan="5">
+        
+          <div style="margin:8px 0;">
+
+                <input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll('prefix', this.form, 'idarray', 'chkall')" />
+                <label for="chkall">{lang csdn123com_zaker:select_all}</label>
+                &nbsp;&nbsp;
+                <input type="submit" value="{lang csdn123com_zaker:publish_all}" name="selimport" class="btn" id="selimport" onClick="this.value='{lang csdn123com_zaker:in_release}'" />
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="submit" value="{lang csdn123com_zaker:delete_all}" name="seldelete" class="btn" />
+            
+           </div>
+          
+          </td>
+      </tr>
+    </tbody>
+  </table>
+<div class="pg" style="margin-top:16px;margin-bottom:32px;">  	
+    
+    <!--{if $newsCount>0}-->
+    <a href="?{$homePage}&formhash={FORMHASH}">{lang csdn123com_zaker:homepage}</a>
+  	<a href="?{$prePage}&formhash={FORMHASH}">{lang csdn123com_zaker:previous_page}</a>
+    &nbsp;&nbsp;{$showPage}&nbsp;&nbsp; 
+    <a href="?{$nextPage}&formhash={FORMHASH}">{lang csdn123com_zaker:next_page}</a>
+    <a href="?{$endPage}&formhash={FORMHASH}">{lang csdn123com_zaker:end_page}</a>&nbsp;&nbsp;
+    <em>{$TotalNumber}</em>
+    <!--{/if}-->
+    
+</div>  
+</form>
+<script>
+function importtobbs(myid)
+{
+	document.getElementById(myid).innerHTML='<span style="color:red">{lang csdn123com_zaker:in_release}</span>';
+}
+</script>

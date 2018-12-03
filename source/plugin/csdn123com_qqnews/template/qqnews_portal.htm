@@ -1,0 +1,104 @@
+<!--{block csdn123com_qqnews_return}-->
+
+<div style="background:#ddd;margin-top:16px;margin-bottom:16px;padding:16px;">
+  <input type="hidden" class="px" id="hzw_catid" value="{$_GET['catid']}" />
+  <table cellpadding="8" cellspacing="4">
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:qqnews_url}</td>
+      <td><input type="text" class="px" style="width: 30em" id="hzw_fromurl" /></td>
+    </tr>
+	<tbody {if $csdn123_showmore!=1} style="display:none" {/if}>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:recovery_number}</td>
+      <td><input type="text" class="px" id="hzw_replaynum" value="20" /></td>
+    </tr>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:which_user_is_publishing}</td>
+      <td><input type="text" class="px" id="hzw_first_uid" value="{$first_uid}" style="width: 30em" /></td>
+    </tr>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:replyuser_uid}</td>
+      <td><input type="text" class="px" id="hzw_reply_uid" value="{$reply_uid}" style="width: 30em" /></td>
+    </tr>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:pseudo_original}</td>
+      <td><input name="hzw_weiyanchang" type="radio" class="radio" value="1" id="weiyanchang_yes">
+        <label for="weiyanchang_yes">{lang csdn123com_qqnews:select_yes}</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="hzw_weiyanchang" type="radio" class="radio" value="0" id="weiyanchang_no" checked>
+        <label for="weiyanchang_no">{lang csdn123com_qqnews:select_no}</label></td>
+    </tr>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:intval_time}</td>
+      <td><input type="text" class="px" id="hzw_intval_time" value="3600" /></td>
+    </tr>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:chinese_encoding_type}</td>
+      <td><input name="hzw_simplified" type="radio" class="radio" value="0" id="simplified_original" checked>
+        <label for="simplified_original">{lang csdn123com_qqnews:non_conversion}</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="hzw_simplified" type="radio" class="radio" value="2" id="simplified_yes">
+        <label for="simplified_yes">{lang csdn123com_qqnews:simplified}</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input name="hzw_simplified" type="radio" class="radio" value="1" id="simplified_no">
+        <label for="simplified_no">{lang csdn123com_qqnews:traditional}</label></td>
+    </tr>
+    <tr>
+      <td align="right">{lang csdn123com_qqnews:views}</td>
+      <td><input type="text" class="px" id="hzw_views" value="{$views}" /></td>
+    </tr>
+	</tbody>
+    <tr>
+      <td colspan="2"><div style="margin-left:100px;margin-top:16px;">
+          <input type="button" class="pn pnc" id="hzw_submit" value="{lang csdn123com_qqnews:confirm_collection}" style="padding: 0 10px;line-height: 21px;" />
+        </div></td>
+    </tr>
+  </table>
+</div>
+<script src="{$_G['siteurl']}source/plugin/csdn123com_qqnews/res/jquery.min.js"></script> 
+<script type="text/javascript">
+var csdn123_jQ = jQuery.noConflict(true); (function($, window, undefined) {
+    $("#hzw_submit").click(function() {
+        var hzw_fromurl = $("#hzw_fromurl").val();
+        var hzw_replaynum = $("#hzw_replaynum").val();       
+        var hzw_catid=$("#catid").val();
+        var hzw_first_uid = $("#hzw_first_uid").val();
+        var hzw_reply_uid = $("#hzw_reply_uid").val();
+        var hzw_weiyanchang = $("input[name='hzw_weiyanchang']:checked").val();
+        var hzw_intval_time = $("#hzw_intval_time").val();
+        var hzw_simplified = $("input[name='hzw_simplified']:checked").val();
+        var hzw_views = $("#hzw_views").val();
+        var hzw_url = "hzw_fromurl=" + encodeURIComponent(hzw_fromurl);
+        hzw_url = hzw_url + "&hzw_replaynum=" + hzw_replaynum;
+		hzw_url = hzw_url + "&hzw_catid=" + hzw_catid;
+        hzw_url = hzw_url + "&hzw_first_uid=" + hzw_first_uid;
+        hzw_url = hzw_url + "&hzw_reply_uid=" + hzw_reply_uid;
+        hzw_url = hzw_url + "&hzw_weiyanchang=" + hzw_weiyanchang;
+        hzw_url = hzw_url + "&hzw_intval_time=" + hzw_intval_time;
+        hzw_url = hzw_url + "&hzw_simplified=" + hzw_simplified;
+        hzw_url = hzw_url + "&hzw_views=" + hzw_views;
+        hzw_url = hzw_url + "&hzw_forum_portal=portal";
+        hzw_url = hzw_url + "&t=" + (new Date()).getTime();
+        if (hzw_fromurl == "") {
+            $("#hzw_fromurl").focus();
+            return false
+        } else {
+            $(this).val("{lang csdn123com_qqnews:wait_moment}");
+            $.get("{$_G['siteurl']}plugin.php?id=csdn123com_qqnews:front_control&" + hzw_url,
+            function(data) {
+                if (data.length > 10 && data.length < 800) {
+                    window.location.href = data
+                } else if (data == "no1") {
+                    alert("{lang csdn123com_qqnews:content_url_error}")
+                } else {
+                    alert("{lang csdn123com_qqnews:catch_err}")
+                }
+                $("#hzw_submit").val("{lang csdn123com_qqnews:confirm_collection}")
+            })
+        }
+        return false
+    })
+})(csdn123_jQ, window);
+</script> 
+
+<!--{/block}-->

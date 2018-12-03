@@ -1,0 +1,23 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&addword=yes" id="cpform" >
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="zhiwu" id="zhiwu" />
+  <table class="tb tb2" style="width:auto">
+    <tbody>
+      <tr class="header">
+        <th>{lang csdn123_news:primitive_words}</th>
+        <th>{lang csdn123_news:synonym_substitution_words}</th>
+        <th>&nbsp;</th>
+      </tr>
+    <tr>
+      <td><input type="text" class="txt" name="word1" style="width:250px;margin-right:50px"></td>
+      <td><input type="text" class="txt" name="word2" style="width:250px;margin-right:50px"></td>
+      <td>
+      	<input type="submit" class="btn" value="{lang csdn123_news:add}" />
+      </td>
+    </tr>
+    </tbody>    
+  </table>
+</form>
+<script>
+document.getElementById('zhiwu').value=document.URL;
+</script>

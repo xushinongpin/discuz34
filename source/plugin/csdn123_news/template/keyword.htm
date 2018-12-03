@@ -1,0 +1,67 @@
+  <table class="tb tb2 ">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="5">{lang csdn123_news:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="4">
+          <ul>
+            <li>{lang csdn123_news:keyword_prompt01}</li>
+            <li>{lang csdn123_news:keyword_prompt02}</li>
+          </ul>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="5">
+        	<div style="margin-top:16px;margin-bottom:16px;">
+
+        		<a class="addtr" href="?{$server_url}&hot_keyword=yes&formhash={FORMHASH}" onClick="this.innerHTML='{lang csdn123_news:wait_moment}'">{lang csdn123_news:hot_keyword}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        		<a class="addtr" href="javascript:if(confirm('{lang csdn123_news:clears_all}')){window.location.href='?{$server_url}&clears_all=yes&formhash={FORMHASH}';}" style="background-position-y:-286px">{lang csdn123_news:clears_all}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+        	
+            </div>
+        </td>
+      </tr>      
+      <tr class="header">
+        <th>{lang csdn123_news:keyword}</th>
+        <th>{lang csdn123_news:keyword_orderby}</th>
+        <th>&nbsp;</th>
+        <th>&nbsp;</th>
+      </tr>
+    <form action="?{$server_url}&keyword_add=yes" method="post">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+	<input type="hidden" name="zhiwu" id="zhiwu" />
+    <tr class="hover">
+      <td width="30%" style="height:60px" valign="middle"><input type="text" name="keyword" class="txt" style="width:85%;" /></td>
+      <td width="20%" style="height:60px" valign="middle"><input type="text" name="orderby_num" class="txt" style="width:85%;" /></td>
+      <td width="15%" style="height:60px" valign="middle"><input type="submit" value="{lang csdn123_news:keyword_add}" class="btn" /></td>
+      <td width="35%" style="height:60px" valign="middle">&nbsp;&nbsp;</td>
+    </tr>
+    </form>
+    <form action="?{$server_url}&keyword_update=yes" method="post">
+    <input type="hidden" name="formhash" value="{FORMHASH}" />
+    {loop $keyword_list $keyword_value}
+    <tr class="hover">
+      <td width="30%"><input type="text" name="keyword{$keyword_value['ID']}" class="txt" style="width:85%;" value="{$keyword_value['word_str']}" /></td>
+      <td width="20%"><input type="text" name="orderby_num{$keyword_value['ID']}" class="txt" style="width:85%;" value="{$keyword_value['orderby_num']}" /></td>
+      <td width="15%"><input type="button" value="{lang csdn123_news:delete}" class="btn" onClick="window.location.href='?{$server_url}&formhash={FORMHASH}&delid={$keyword_value['ID']}'" /></td>
+      <td width="35%"><input type="checkbox" checked name="ids[]" value="{$keyword_value['ID']}" style="display:none" /></td>
+    </tr>
+    {/loop}
+    <tr>
+    	<td colspan="4">
+        	
+            <div style="margin-top:32px;text-align:center;width:55%">
+            	
+                <input type="submit" value="{lang csdn123_news:confirm_update}" class="btn" />
+                
+            </div>
+            
+        </td>
+    </tr> 
+    </form>
+    </tbody>    
+  </table>
+<script>
+document.getElementById('zhiwu').value=window.location.href;
+</script>
+

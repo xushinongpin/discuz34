@@ -1,0 +1,62 @@
+<div class="container" id="cpcontainer">
+  <form name="cpform" method="post" action="?{$server_url}&adduser=yes" id="cpform">
+    <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+    <table class="tb tb2 " id="tips">
+      <tbody>
+        <tr>
+          <th class="partition" colspan="2">{lang csdn123com_qqnews:reminder}</th>
+        </tr>
+        <tr>
+          <td class="tipsblock" s="1" colspan="2"><ul id="tipslis">
+              <li>{lang csdn123com_qqnews:reminder_01}</li>
+              <li>{lang csdn123com_qqnews:reminder_02}</li>
+              <li>{lang csdn123com_qqnews:reminder_03}</li>
+              <li>{lang csdn123com_qqnews:reminder_04}</li>
+              <li>{lang csdn123com_qqnews:reminder_05}</li>
+              <!--{if strpos($_G['setting']['ucenterurl'], $_G['siteurl']) === false }-->
+              <li><span style="color:#F00">{lang csdn123com_qqnews:reminder_06}</span></li>
+              <!--{/if}-->
+            </ul></td>
+        </tr>
+        <tr>
+          <td colspan="2" class="td27" s="1"> {lang csdn123com_qqnews:initial_password}</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+          <td class="vtop rowform"><input type="text" value="xxxxxxxxxx" name="pws" class="txt"  /></td>
+          <td class="vtop tips2" s="1">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="td27" s="1"> {lang csdn123com_qqnews:user_group}</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+          <td class="vtop rowform"><select name="newgroupid">
+              
+                  {$groupselect}
+              
+            </select></td>
+          <td class="vtop tips2" s="1">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="td27" s="1"> {lang csdn123com_qqnews:points_money}</td>
+        </tr>
+        <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+          <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+              <li class="checked">
+                <input name="credits" type="radio" value="1" checked>
+                &nbsp;{lang csdn123com_qqnews:select_yes}
+                &nbsp;&nbsp;&nbsp;&nbsp;</li>
+              <li>
+                <input name="credits" type="radio" value="0">
+                &nbsp;{lang csdn123com_qqnews:select_no}</li>
+            </ul></td>
+          <td class="vtop tips2" s="1">&nbsp;</td>
+        </tr>
+        <tr>
+          <td colspan="2" class="td27" s="1"><div style="margin-top:8px;">
+              <input type="submit" class="btn" value="{lang csdn123com_qqnews:confirm_registration}"  onClick="this.value='{lang csdn123com_qqnews:in_registration}'">
+            </div></td>
+        </tr>
+      </tbody>
+    </table>
+  </form>
+</div>

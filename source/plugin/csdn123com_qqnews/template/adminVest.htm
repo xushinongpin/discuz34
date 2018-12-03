@@ -1,0 +1,74 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&deluser=yes" id="cpform" >
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <table class="tb tb2 ">
+    <tbody>
+      <tr>
+        <th class="partition" colspan="7">{lang csdn123com_qqnews:reminder}</th>
+      </tr>
+      <tr>
+        <td class="tipsblock" s="1" colspan="7"><ul>
+            <li style="font-weight:bold">{lang csdn123com_qqnews:forwarding_tips}</li>
+            <li>{lang csdn123com_qqnews:registered_vest_prompt01}</li>
+            <li>{lang csdn123com_qqnews:registered_vest_prompt02}</li>
+          </ul></td>
+      </tr>
+      <tr>
+        <td colspan="7">
+        	<div style="margin-top:16px;margin-bottom:16px;">
+            
+                <a href="?{$server_url}&subpmod=regvest&formhash={FORMHASH}" class="addtr">{lang csdn123com_qqnews:registered_vest}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="?{$server_url}&subpmod=importVest&formhash={FORMHASH}" class="addtr">{lang csdn123com_qqnews:lead_in_vest}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="?{$server_url}&subpmod=exportVest&formhash={FORMHASH}" class="addtr" style="background-position:-286px -150px">{lang csdn123com_qqnews:export_vest}</a> &nbsp;&nbsp;&nbsp;&nbsp;
+                <a href="javascript:if(confirm('{lang csdn123com_qqnews:confirm_vest_clears}')){window.location.href='?{$server_url}&clears_all=yes&deluser=yes&formhash={FORMHASH}';}" class="addtr" style="background-position-y:-286px">{lang csdn123com_qqnews:clears_all}</a> &nbsp;&nbsp;&nbsp;&nbsp; 
+                
+            </div>
+       </td>
+      </tr>
+      <tr class="header">
+        <th>&nbsp;</th>
+        <th>UID</th>
+        <th>{lang csdn123com_qqnews:user_name}</th>
+        <th>{lang csdn123com_qqnews:mail}</th>
+        <th>{lang csdn123com_qqnews:avatar}</th>
+        <th>{lang csdn123com_qqnews:initial_password}</th>
+        <th><a href="{$_G['siteurl']}{ADMINSCRIPT}?action=members&operation=search">{lang csdn123com_qqnews:managing_users}</a></th>
+      </tr>
+    {loop $user_list $user_listValue}
+    <tr class="hover">
+      <td class="td25"><input type="checkbox" name="uidarray[]" value="{eval echo dhtmlspecialchars($user_listValue['uid'])}" class="checkbox"></td>
+      <td class="td25">{eval echo dhtmlspecialchars($user_listValue['uid'])}</td>
+      <td><a href="{$_G['siteurl']}home.php?mod=space&uid={eval echo dhtmlspecialchars($user_listValue['uid'])}&do=profile" target="_blank">{eval echo dhtmlspecialchars($user_listValue['username'])}</a></td>
+      <td>{eval echo dhtmlspecialchars($user_listValue['username_mail'])}</td>
+      <td><a href="?{$server_url}&modifypic={eval echo dhtmlspecialchars($user_listValue['uid'])}&formhash={FORMHASH}"><img src="{eval echo avatar($user_listValue['uid'], '', TRUE)}" width="32" height="32" onerror="this.onerror=null;this.src='{$_G['setting']['ucenterurl']}/images/noavatar_middle.gif'" /></a></td>
+      <td>{eval echo dhtmlspecialchars($user_listValue['username_pwd'])}</td>
+      <td><a href="{$_G['siteurl']}{ADMINSCRIPT}?action=members&operation=edit&uid={eval echo dhtmlspecialchars($user_listValue['uid'])}">{lang csdn123com_qqnews:modify}</a></td>
+    </tr>
+    {/loop}
+    <tr>
+      <td colspan="7">
+      
+      <div style="margin-top:8px;margin-bottom:8px;">
+        <input name="chkall" id="chkall" type="checkbox" class="checkbox" onclick="checkAll('prefix', this.form, 'idarray', 'chkall')" />
+        <label for="chkall">{lang csdn123com_qqnews:select_all}</label>
+        &nbsp;&nbsp;&nbsp;&nbsp;
+        <input type="submit" class="btn" id="submit_deletesubmit" name="deletesubmit" value="{lang csdn123com_qqnews:delete}" />
+     </div>  
+        
+      </td>
+    </tr>
+    </tbody>
+    
+  </table>
+  <div class="pg" style="margin-top:32px;margin-bottom:32px;">  	
+    
+    <!--{if $VestCount>0 }-->
+    <a href="?{$homePage}&formhash={FORMHASH}">{lang csdn123com_qqnews:homepage}</a>
+  	<a href="?{$prePage}&formhash={FORMHASH}">{lang csdn123com_qqnews:previous_page}</a>
+    &nbsp;&nbsp;{$showPage}&nbsp;&nbsp; 
+    <a href="?{$nextPage}&formhash={FORMHASH}">{lang csdn123com_qqnews:next_page}</a>
+    <a href="?{$endPage}&formhash={FORMHASH}">{lang csdn123com_qqnews:end_page}</a>&nbsp;&nbsp;
+    <em>{$TotalNumber}</em>
+    <!--{/if}-->
+    
+  </div>
+</form>

@@ -1,0 +1,376 @@
+<script src="source/plugin/csdn123com_qqnews/res/jquery.min.js"></script>
+
+<form action="?{$server_url}&update=yes&csdn123_agrs=yes" method="post" id="form1">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="news_id" value="{$update_rs['ID']}" />
+  <table class="tb tb2 ">
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:fixedTime_short_keyword}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform" colspan="2"><input name="keyword" type="text" class="txt" value="{$update_rs['keyword']}"></td>      
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:where_is_content_imported}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform">
+
+       <ul onmouseover="altStyle(this);">
+       <!--{if $update_rs['forum_portal']=='forum'}-->
+          <li class="checked" id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:import_to_forum}</li>
+          <li id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal">
+            &nbsp;{lang csdn123com_qqnews:import_to_portal}</li>
+          <li id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group">
+            &nbsp;{lang csdn123com_qqnews:import_group}</li>
+        <!--{elseif $update_rs['forum_portal']=='portal'}-->
+          <li id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum">
+            &nbsp;{lang csdn123com_qqnews:import_to_forum}</li>
+          <li class="checked" id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:import_to_portal}</li>
+          <li id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group">
+            &nbsp;{lang csdn123com_qqnews:import_group}</li>
+        <!--{else}-->
+          <li id="forum">
+            <input class="radio" type="radio" name="forum_portal" value="forum">
+            &nbsp;{lang csdn123com_qqnews:import_to_forum}</li>
+          <li id="portal">
+            <input class="radio" type="radio" name="forum_portal" value="portal">
+            &nbsp;{lang csdn123com_qqnews:import_to_portal}</li>
+          <li class="checked" id="group">
+            <input class="radio" type="radio" name="forum_portal" value="group" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:import_group}</li>
+        <!--{/if}-->
+        </ul>
+        
+        </td>
+      <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+    </tr>
+    <tbody id="forum_panel"  {if $update_rs['forum_portal']!='forum'}} style="display:none" {/if}>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:all_sections_of_forum}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform"><select name="fid" id="fid" onChange="ajaxget('forum.php?mod=ajax&action=getthreadtypes&fid=' + this.value, 'threadtypes');">
+            
+            <!--{eval echo forumselect(FALSE, 0, $update_rs['fid'], TRUE)}-->
+            
+          </select></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:subject_classification}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faqd3e6')">
+        <td class="vtop rowform"><span id="threadtypes">
+            <select name="threadtypeid" id="threadtypeid">
+              <option value="0"></option>
+              
+              <!--{loop $typeclassArr $typeclass}--> 
+              
+              <!--{if $typeclass['typeid']==$update_rs['threadtypeid']}-->
+              
+              <option value="{$typeclass['typeid']}" selected>{$typeclass['name']}</option>
+              
+              <!--{else}-->
+              
+              <option value="{$typeclass['typeid']}">{$typeclass['name']}</option>
+              
+              <!--{/if}--> 
+              
+              <!--{/loop}-->
+              
+            </select>
+            </span></td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="portal_panel" {if $update_rs['forum_portal']!='portal'}} style="display:none" {/if}>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:all_columns_of_portal}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform">
+        
+        <!--{eval echo category_showselect('portal', 'portal_catid', false, $update_rs['portal_catid'])}-->
+        
+        </td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tbody id="group_panel" {if $update_rs['forum_portal']!='group'}} style="display:none" {/if}>
+      <tr>
+        <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:all_groups}</td>
+      </tr>
+      <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+        <td class="vtop rowform">
+        	
+            <select name="group_fid">
+            <!--{loop $grouplistArr $groupValue}-->
+            
+                <!--{if $groupValue['fid']==$update_rs['group_fid']}-->
+                    <option value="{$groupValue['fid']}" selected>{$groupValue['name']}</option>
+                <!--{else}-->
+                    <option value="{$groupValue['fid']}">{$groupValue['name']}</option>
+                <!--{/if}-->
+                  
+            <!--{/loop}-->
+            </select>
+            
+        </td>
+        <td class="vtop tips2" s="1">&nbsp;&nbsp;</td>
+      </tr>
+    </tbody>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:replies_count}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="replaynum"  type="text" class="txt" value="{$update_rs['replaynum']}"></td>
+      <td class="vtop tips2" s="1">
+			<strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:replies_count_prompt}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:which_user_is_publishing}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="first_uid"  type="text" class="txt" value="{$update_rs['first_uid']}"></td>
+      <td class="vtop tips2" s="1">
+      <!--{if majia_chk()}-->
+      	<a href="{$regvest_url}" style="color:red;text-decoration:none">{lang csdn123com_qqnews:vest_empty}</a>
+      <!--{else}-->
+      	<strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:which_user_is_publishing_prompt}
+      <!--{/if}-->
+      </td>
+    </tr>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:replyuser_uid}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="reply_uid"  type="text" class="txt" value="{$update_rs['reply_uid']}"></td>
+      <td class="vtop tips2" s="1">
+      <!--{if majia_chk()}-->
+      	<a href="{$regvest_url}" style="color:red;text-decoration:none">{lang csdn123com_qqnews:vest_empty}</a>
+      <!--{else}-->
+      	<strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:replyuser_uid_prompt}
+      <!--{/if}-->
+      </td>
+    </tr>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:intval_time}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="intval_time"  type="text" class="txt" value="{$update_rs['intval_time']}"></td>
+      <td class="vtop tips2" s="1">
+      	<strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:intval_time_prompt}
+      </td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:display_source_link}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+	   <!--{if $update_rs['display_link']==1}-->
+          <li class="checked">
+            <input class="radio" type="radio" name="display_link" value="1" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="display_link" value="0">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	   <!--{else}-->
+          <li>
+            <input class="radio" type="radio" name="display_link" value="1">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="display_link" value="0" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	   <!--{/if}-->	  
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:display_source_link_prompt}</td>
+    </tr>	
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:filter_image}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);" id="chk_filter_image">
+	  <!--{if $update_rs['filter_image']==1}-->
+          <li class="checked">
+            <input class="radio" type="radio" name="filter_image" value="1" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="filter_image" value="0">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	   <!--{else}-->
+          <li>
+            <input class="radio" type="radio" name="filter_image" value="1">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="filter_image" value="0" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>	   <!--{/if}-->			
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:filter_image_prompt}</td>
+    </tr>
+	<tbody id="image_setting">
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:image_localized_in_storage}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+	  <!--{if $update_rs['image_localized']==1}-->
+          <li class="checked">
+            <input class="radio" type="radio" name="image_localized" value="1" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="image_localized" value="0">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	 <!--{else}-->
+		<li>
+            <input class="radio" type="radio" name="image_localized" value="1">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="image_localized" value="0" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	 <!--{/if}-->
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:image_localized_in_storage_prompt}</td>
+    </tr>
+	<tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:image_center}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+	  <!--{if $update_rs['image_center']==1}-->
+          <li class="checked">
+            <input class="radio" type="radio" name="image_center" value="1" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="image_center" value="0">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	<!--{else}-->
+		<li>
+            <input class="radio" type="radio" name="image_center" value="1">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="image_center" value="0" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	<!--{/if}-->	
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:image_center_prompt}</td>
+    </tr>
+	</tbody>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:pseudo_original}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+	  <!--{if $update_rs['pseudo_original']==1}-->
+          <li class="checked">
+            <input class="radio" type="radio" name="pseudo_original" value="1" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li>
+            <input class="radio" type="radio" name="pseudo_original" value="0">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	<!--{else}-->
+		<li>
+            <input class="radio" type="radio" name="pseudo_original" value="1">
+            &nbsp;{lang csdn123com_qqnews:select_yes}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="pseudo_original" value="0" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:select_no}</li>
+	<!--{/if}-->	
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:pseudo_original_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:chinese_encoding_type}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><ul onmouseover="altStyle(this);">
+	  <!--{if $update_rs['chinese_encoding']==0}-->
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="0" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:non_conversion}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="1">
+            &nbsp;{lang csdn123com_qqnews:traditional}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="2">
+            &nbsp;{lang csdn123com_qqnews:simplified}</li>
+	   <!--{elseif $update_rs['chinese_encoding']==1}-->
+		  <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="0">
+            &nbsp;{lang csdn123com_qqnews:non_conversion}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="1" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:traditional}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="2">
+            &nbsp;{lang csdn123com_qqnews:simplified}</li>
+	   <!--{else}-->
+		  <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="0">
+            &nbsp;{lang csdn123com_qqnews:non_conversion}</li>
+          <li>
+            <input class="radio" type="radio" name="chinese_encoding" value="1">
+            &nbsp;{lang csdn123com_qqnews:traditional}</li>
+          <li class="checked">
+            <input class="radio" type="radio" name="chinese_encoding" value="2" checked="checked">
+            &nbsp;{lang csdn123com_qqnews:simplified}</li>
+	   <!--{/if}-->
+        </ul></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:chinese_encoding_type_prompt}</td>
+    </tr>
+    <tr>
+      <td colspan="2" class="td27" s="1">{lang csdn123com_qqnews:views}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform"><input name="views"  type="text" class="txt" value="{$update_rs['views']}"></td>
+      <td class="vtop tips2" s="1"><strong>{lang csdn123com_qqnews:prompt}</strong>{lang csdn123com_qqnews:views_prompt}</td>
+    </tr>    
+    <tr>
+      <td colspan="15"><br />
+        <div class="fixsel">
+          <input type="submit" class="btn" value="{lang csdn123com_qqnews:confirm_modify}" onClick="this.value='{lang csdn123com_qqnews:wait_moment}'">
+        </div></td>
+    </tr>
+  </table>
+</form>
+<script>
+var csdn123_jQ = jQuery.noConflict(true);
+(function ( $, window, undefined ) {
+	
+	$("#forum").click(function(){
+	
+		$("#forum_panel").show();
+		$("#portal_panel").hide();
+		$("#group_panel").hide();	
+		
+	});
+
+	$("#portal").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").show();
+		$("#group_panel").hide();	
+		
+	});
+	
+	$("#group").click(function(){
+	
+		$("#forum_panel").hide();
+		$("#portal_panel").hide();
+		$("#group_panel").show();	
+		
+	});
+	
+	
+	
+})( csdn123_jQ, window);
+</script> 

@@ -1,0 +1,171 @@
+<script src="source/plugin/csdn123_news/res/jquery.min.js"></script>
+
+<form action="?{$server_url}&submitaddrule=yes" method="post" id="form1">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <input type="hidden" name="zhiwu" id="zhiwu" />
+  <table class="tb tb2 ">
+    <tr>
+        <th class="partition">{lang csdn123_news:reminder}</th>
+    </tr>
+    <tr>
+        <td class="tipsblock" s="1">
+          <ul>
+            <li>{lang csdn123_news:addrule_prompt01}</li>
+            <li>{lang csdn123_news:addrule_prompt02}</li>
+          </ul>
+       </td>
+    </tr>
+	<tr>
+		<td >
+		<br><br>
+		<a href="?{$server_url}&add_rule=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:add_rule}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="?{$server_url}&admin_rule=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:admin_rule}</a>&nbsp;&nbsp;&nbsp;&nbsp;
+		<a href="?{$server_url}&import_rule=yes&formhash={FORMHASH}" class="addtr">{lang csdn123_news:import_rule}</a>
+		<br><br>
+		</td>
+	</tr>
+    <tr>
+      <td  class="td27" s="1">{lang csdn123_news:rule_name}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform" >
+		<input name="rule_name" id="rule_name" type="text" class="txt"><br><br>
+		<strong>{lang csdn123_news:prompt}</strong>{lang csdn123_news:rule_name_prompt}<br><br><br><br>
+	  </td>
+    </tr>	
+    <tr>
+      <td  class="td27" s="1">{lang csdn123_news:rule_title}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform" >
+	  
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:rule_start_string}
+		<input type="text" class="txt" name="title01_start" value="<title>" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:rule_end_string}
+		<input type="text" class="txt" name="title01_end" value="</title>" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:rule_start_string}
+		<input type="text" class="txt" name="title02_start" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:rule_end_string}
+		<input type="text" class="txt" name="title02_end" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:rule_start_string}
+		<input type="text" class="txt" name="title03_start" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:rule_end_string}
+		<input type="text" class="txt" name="title03_end" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		<strong>{lang csdn123_news:prompt}</strong>
+		{lang csdn123_news:rule_title_prompt}
+		</div><br><br><br>
+		
+		
+	  </td>
+    </tr>
+	<tr>
+      <td class="td27" s="1">{lang csdn123_news:rule_content}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform" >
+	  
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:rule_start_string}
+		<input type="text" class="txt" name="content01_start" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:rule_end_string}
+		<input type="text" class="txt" name="content01_end" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:rule_start_string}
+		<input type="text" class="txt" name="content02_start" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:rule_end_string}
+		<input type="text" class="txt" name="content02_end" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:rule_start_string}
+		<input type="text" class="txt" name="content03_start" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:rule_end_string}
+		<input type="text" class="txt" name="content03_end" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		<strong>{lang csdn123_news:prompt}</strong>
+		{lang csdn123_news:rule_title_prompt}
+		</div><br><br>
+		
+		
+	  </td>
+    </tr>
+	<tr>
+      <td class="td27" s="1">{lang csdn123_news:replace_title}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform" >
+	  
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		1.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:replace_string}
+		<input type="text" class="txt" name="replace01_start" value="{$replace01[0]}" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:replace_repstr}
+		<input type="text" class="txt" name="replace01_end" value="{$replace01[1]}" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		2.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:replace_string}
+		<input type="text" class="txt" name="replace02_start" value="{$replace02[0]}" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:replace_repstr}
+		<input type="text" class="txt" name="replace02_end" value="{$replace02[1]}" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		3.&nbsp;&nbsp;&nbsp;&nbsp;{lang csdn123_news:replace_string}
+		<input type="text" class="txt" name="replace03_start" value="{$replace03[0]}" />
+		&nbsp;&nbsp;-----&nbsp;&nbsp;
+		{lang csdn123_news:replace_repstr}
+		<input type="text" class="txt" name="replace03_end" value="{$replace03[1]}" />
+		</div>
+		
+		<div style="margin-bottom:8px;padding-bottom:8px;">
+		<strong>{lang csdn123_news:prompt}</strong>
+		{lang csdn123_news:replace_prompt}
+		</div><br><br>
+		
+		
+	  </td>
+    </tr>
+	<tr>
+      <td  class="td27" s="1">{lang csdn123_news:rule_remark}</td>
+    </tr>
+    <tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+      <td class="vtop rowform" >
+		<input name="rule_remark" id="rule_remark" type="text" class="txt" style="width:450px"><br><br>
+	  </td>
+    </tr>
+    <tr>
+      <td><br />
+        <div class="fixsel">
+          <input type="submit" class="btn" value="{lang csdn123_news:confirm_add}">
+        </div></td>
+    </tr>
+  </table>
+</form>
+<script>
+if(window.location.hostname.length>5)
+{
+	document.getElementById('zhiwu').value="http://" + window.location.hostname;
+}
+</script>

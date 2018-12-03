@@ -1,0 +1,200 @@
+<script>
+function tobase64(str)
+{
+	var base = new Base64();
+	var result = base.encode(str);
+	document.getElementById("htmlcode").value=result;
+}
+function Base64() {  
+   
+    // private property  
+    _keyStr = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/=";  
+   
+    // public method for encoding  
+    this.encode = function (input) {  
+        var output = "";  
+        var chr1, chr2, chr3, enc1, enc2, enc3, enc4;  
+        var i = 0;  
+        input = _utf8_encode(input);  
+        while (i < input.length) {  
+            chr1 = input.charCodeAt(i++);  
+            chr2 = input.charCodeAt(i++);  
+            chr3 = input.charCodeAt(i++);  
+            enc1 = chr1 >> 2;  
+            enc2 = ((chr1 & 3) << 4) | (chr2 >> 4);  
+            enc3 = ((chr2 & 15) << 2) | (chr3 >> 6);  
+            enc4 = chr3 & 63;  
+            if (isNaN(chr2)) {  
+                enc3 = enc4 = 64;  
+            } else if (isNaN(chr3)) {  
+                enc4 = 64;  
+            }  
+            output = output +  
+            _keyStr.charAt(enc1) + _keyStr.charAt(enc2) +  
+            _keyStr.charAt(enc3) + _keyStr.charAt(enc4);  
+        }  
+        return output;  
+    }  
+   
+    // public method for decoding  
+    this.decode = function (input) {  
+        var output = "";  
+        var chr1, chr2, chr3;  
+        var enc1, enc2, enc3, enc4;  
+        var i = 0;  
+        input = input.replace(/[^A-Za-z0-9\+\/\=]/g, "");  
+        while (i < input.length) {  
+            enc1 = _keyStr.indexOf(input.charAt(i++));  
+            enc2 = _keyStr.indexOf(input.charAt(i++));  
+            enc3 = _keyStr.indexOf(input.charAt(i++));  
+            enc4 = _keyStr.indexOf(input.charAt(i++));  
+            chr1 = (enc1 << 2) | (enc2 >> 4);  
+            chr2 = ((enc2 & 15) << 4) | (enc3 >> 2);  
+            chr3 = ((enc3 & 3) << 6) | enc4;  
+            output = output + String.fromCharCode(chr1);  
+            if (enc3 != 64) {  
+                output = output + String.fromCharCode(chr2);  
+            }  
+            if (enc4 != 64) {  
+                output = output + String.fromCharCode(chr3);  
+            }  
+        }  
+        output = _utf8_decode(output);  
+        return output;  
+    }  
+   
+    // private method for UTF-8 encoding  
+    _utf8_encode = function (string) {  
+        string = string.replace(/\r\n/g,"\n");  
+        var utftext = "";  
+        for (var n = 0; n < string.length; n++) {  
+            var c = string.charCodeAt(n);  
+            if (c < 128) {  
+                utftext += String.fromCharCode(c);  
+            } else if((c > 127) && (c < 2048)) {  
+                utftext += String.fromCharCode((c >> 6) | 192);  
+                utftext += String.fromCharCode((c & 63) | 128);  
+            } else {  
+                utftext += String.fromCharCode((c >> 12) | 224);  
+                utftext += String.fromCharCode(((c >> 6) & 63) | 128);  
+                utftext += String.fromCharCode((c & 63) | 128);  
+            }  
+   
+        }  
+        return utftext;  
+    }  
+   
+    // private method for UTF-8 decoding  
+    _utf8_decode = function (utftext) {  
+        var string = "";  
+        var i = 0;  
+        var c = c1 = c2 = 0;  
+        while ( i < utftext.length ) {  
+            c = utftext.charCodeAt(i);  
+            if (c < 128) {  
+                string += String.fromCharCode(c);  
+                i++;  
+            } else if((c > 191) && (c < 224)) {  
+                c2 = utftext.charCodeAt(i+1);  
+                string += String.fromCharCode(((c & 31) << 6) | (c2 & 63));  
+                i += 2;  
+            } else {  
+                c2 = utftext.charCodeAt(i+1);  
+                c3 = utftext.charCodeAt(i+2);  
+                string += String.fromCharCode(((c & 15) << 12) | ((c2 & 63) << 6) | (c3 & 63));  
+                i += 3;  
+            }  
+        }  
+        return string;  
+    }  
+}
+</script>
+<form action="?{$server_url}&step2=yes" method="post" id="form1">
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+<table class="tb tb2 ">
+<tr>
+	<th class="partition" colspan="2">
+	{lang csdn123_news:url_step_prompt}&nbsp;&nbsp;	
+	<span style="color:#77c402">{lang csdn123_news:url_step1}</span>
+	&nbsp;<span style="color:#ccc">{lang csdn123_news:url_step2}</span>
+	&nbsp;<span style="color:#ccc">{lang csdn123_news:url_step3}</span>
+	</th>
+</tr>
+<tr>
+	<td class="tipsblock" s="1" colspan="2">
+	  <ul>
+		<li>{lang csdn123_news:url_prompt01}</li>
+		<li>{lang csdn123_news:url_prompt02}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html" target="_blank">http://www.zhiwu55.com/html/2018/hzw_doc_1005/39.html</a></li>
+	  </ul>
+   </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str18}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+  <input name="start_url" type="text" value="http://" class="txt">
+  </td>
+  <td class="vtop tips2" s="1">
+   {lang csdn123_news:prompt}{lang csdn123_news:url_str19}
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str20}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+  <textarea onblur="tobase64(this.value)" rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" id="htmlcode_ori" cols="50" class="tarea" ></textarea>
+  <textarea name="htmlcode" id="htmlcode" style="display:none"></textarea>
+  </td>
+  <td class="vtop tips2" s="1">
+   {lang csdn123_news:url_str21}<br />{lang csdn123_news:url_str12}
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:input_cookie}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+  <textarea  rows="6" ondblclick="textareasize(this, 1)" onkeyup="textareasize(this, 0)" onkeydown="textareakey(this, event)" name="inputcookie" cols="50" class="tarea" ></textarea>
+  </td>
+  <td class="vtop tips2" s="1">
+   {lang csdn123_news:input_cookie_prompt}<a href="http://www.zhiwu55.com/html/2018/hzw_doc_0711/15.html" target="_blank">{lang csdn123_news:hzw_hint11}</a><br />{lang csdn123_news:url_str12}
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str22}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+  <input name="url_regex" type="text" value="/\d+\.htm/" class="txt">
+  </td>
+  <td class="vtop tips2" s="1">
+   {lang csdn123_news:prompt}{lang csdn123_news:url_str23}
+  </td>
+</tr>
+<tr>
+  <td colspan="2" class="td27" s="1">{lang csdn123_news:url_str25}</td>
+</tr>
+<tr class="noborder" onmouseover="setfaq(this, 'faq95ed')">
+  <td class="vtop rowform">
+  <input name="url_regex2" type="text" value="/xxxx/" class="txt">
+  </td>
+  <td class="vtop tips2" s="1">
+   {lang csdn123_news:prompt}{lang csdn123_news:url_str24}
+  </td>
+</tr>
+
+<tr>
+	<td colspan="2">
+	<div style="height:40px;line-height:40px;">
+	
+		<input type="submit" class="btn" value="{lang csdn123_news:next_step_check}" name="next_step_check" onclick="this.value='{lang csdn123_news:wait_moment}'">
+		&nbsp;&nbsp;&nbsp;&nbsp;
+		<input type="submit" class="btn" value="{lang csdn123_news:next_step_skip}" name="next_step_skip" onclick="this.value='{lang csdn123_news:wait_moment}'">
+	
+	</div>
+	</td>
+</tr>
+</table>
+</form>

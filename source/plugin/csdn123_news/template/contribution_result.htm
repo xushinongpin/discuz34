@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="zh-cmn-Hans">
+<head>
+<meta charset="{CHARSET}">
+<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0">
+<title>{lang csdn123_news:user_contribution}</title>
+<link rel="stylesheet" href="{$_G['siteurl']}source/plugin/csdn123_news/template/weui.css"/>
+</head>
+<body ontouchstart>
+<div class="container" id="container">
+<!--{if $fail}-->
+<div class="weui-msg">
+        <div class="weui-msg__icon-area"><i class="weui-icon-warn weui-icon_msg"></i></div>
+        <div class="weui-msg__text-area">
+            <h2 class="weui-msg__title">{lang csdn123_news:contribution_fail}</h2>
+            <p class="weui-msg__desc">{lang csdn123_news:contribution_fail_prompt}</p>
+        </div>
+        <div class="weui-msg__opr-area">
+            &nbsp;&nbsp;
+        </div>
+        <div class="weui-msg__extra-area">
+            <div class="weui-footer">
+                &nbsp;&nbsp;
+            </div>
+        </div>
+    </div>
+<!--{else}-->
+  <div class="page msg_success js_show">
+    <div class="weui-msg">
+      <div class="weui-msg__icon-area"><i class="weui-icon-success weui-icon_msg"></i></div>
+      <div class="weui-msg__text-area">
+        <h2 class="weui-msg__title">{lang csdn123_news:contribution_success}</h2>
+        <p class="weui-msg__desc">{lang csdn123_news:enter_url_prompt}</p>
+      </div>
+      <div class="weui-msg__opr-area">
+        <p class="weui-btn-area">&nbsp;&nbsp;</p>
+      </div>
+      <div class="weui-msg__extra-area">
+        <div class="weui-footer"> &nbsp;&nbsp; </div>
+      </div>
+    </div>
+  </div>
+<!--{/if}-->
+</div>
+</body>
+</html>

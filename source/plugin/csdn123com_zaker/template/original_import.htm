@@ -1,0 +1,11 @@
+<form name="cpform" method="post" autocomplete="off" action="?{$server_url}&import_word=yes" id="cpform" >
+  <input type="hidden" name="formhash" id="formhash" value="{FORMHASH}" />
+  <div style="margin:16px;">
+    <textarea class="tarea" style="width:700px;height:300px;margin:4px;" name="word_data" onMouseOver="this.select()">{lang csdn123com_zaker:original_format}</textarea>
+    <br>
+    {lang csdn123com_zaker:original_format_prompt} <br>
+    <br>
+    <br>
+    <input type="submit" class="btn" value="{lang csdn123com_zaker:confirm_import}" onclick="this.value='{lang csdn123com_zaker:import_loading}'"/>
+  </div>
+</form>

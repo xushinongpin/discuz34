@@ -1,0 +1,108 @@
+<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+<a style="color:red;display:block;margin:6px;padding:8px;background:#99cc66;border:1px solid red;text-align:left;height:auto;line-height:20px;font-size:14px;" href="http://www.zhiwu55.com/authorization/csdn123_news.php?hzw_appid={$hzw_appid}" target="_blank">&nbsp;{lang csdn123_news:update_hints}</a>
+<!--{/if}-->
+<div style="margin:16px;padding:16px;">
+<table border="1" cellpadding="18">
+<tr>
+	<td align="right">{lang csdn123_news:version}</td>
+<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->	
+	<td>{lang csdn123_news:trial_version}&nbsp;&nbsp;v9.5</td>
+<!--{else}-->
+	<td style="color:red;">{lang csdn123_news:official_edition}&nbsp;&nbsp;v9.5</td>
+<!--{/if}-->
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:collector_id}</td>
+	<td>{$hzw_appid}</td>
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:collector_key}</td>
+	<td>{$hzw_appsecret}</td>
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:plugin_name}</td>
+	<td>{lang csdn123_news:plugin_detail_name}</td>
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:dev_author}</td>
+	<td><a href="http://www.zhiwu55.com" style="text-decoration:none;color:#000" target="_blank">{lang csdn123_news:zhiwu_app}</a></td>
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:pay_type}</td>
+	<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+	<td><a href="http://www.zhiwu55.com/authorization/csdn123_news.php?hzw_appid={$hzw_appid}" target="_blank">{lang csdn123_news:not_purchased}</a></td>
+	<!--{else}-->
+	<td>
+		<!--{if $csdn123_arr['pay_type']=='alipay'}-->
+		{lang csdn123_news:alipay}
+		<!--{else}-->
+		{lang csdn123_news:wechat}
+		<!--{/if}-->		
+	</td>
+	<!--{/if}-->
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:order_id}</td>
+	<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+	<td><a href="http://www.zhiwu55.com/authorization/csdn123_news.php?hzw_appid={$hzw_appid}" target="_blank">{lang csdn123_news:not_purchased}</a></td>
+	<!--{else}-->
+	<td>{$csdn123_arr['order_number']}</td>
+	<!--{/if}-->
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:trade_no}</td>
+	<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+	<td><a href="http://www.zhiwu55.com/authorization/csdn123_news.php?hzw_appid={$hzw_appid}" target="_blank">{lang csdn123_news:not_purchased}</a></td>
+	<!--{else}-->
+	<td>{$csdn123_arr['pay_number']}</td>
+	<!--{/if}-->
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:pay_datetime}</td>
+	<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+	<td><a href="http://www.zhiwu55.com/authorization/csdn123_news.php?hzw_appid={$hzw_appid}" target="_blank">{lang csdn123_news:not_purchased}</a></td>
+	<!--{else}-->
+	<td>{$csdn123_arr['pay_datetime']}</td>
+	<!--{/if}-->
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:help_qq}</td>
+	<td>2085244671</td>
+</tr>
+<tr>
+	<td align="right">{lang csdn123_news:help_wechat}</td>
+	<td>ccccyyyy4444</td>
+</tr>
+<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+<tr>
+	<td colspan="2" align="center"><a style="padding:8px;font-size:14px;color:red;" href="http://www.zhiwu55.com/authorization/csdn123_news_move.php?hzw_appid={$hzw_appid}" target="_blank">{lang csdn123_news:url_str26}</a></td>
+</tr>
+<!--{/if}-->
+<tr>
+	<td colspan="2" align="center"><a style="padding:8px;font-size:14px;color:red;" href="?{$server_url}&update=yes">{lang csdn123_news:update_info}</a></td>
+</tr>
+</table>
+</div>
+<!--{if empty($csdn123_arr['pay_number']) && empty($csdn123_arr['pay_datetime'])}-->
+<script src="{$_G['siteurl']}source/plugin/csdn123_news/template/jquery-1.11.3.min.js"></script>
+<script>
+$(document).ready(function(){
+
+
+	setInterval(function(){
+	
+		var ajaxUrl="{$_G['siteurl']}plugin.php?id=csdn123_news:check_auth&hzw_appid={$hzw_appid}";
+		$.get(ajaxUrl,function(data){
+		
+			if(data==1 || data=="1")
+			{		
+				window.location.href="?{$server_url}&update=yes";
+			}
+		
+		});
+	
+	},5000);	
+	
+});
+</script>
+<!--{/if}-->
